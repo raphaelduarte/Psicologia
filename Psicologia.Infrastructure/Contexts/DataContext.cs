@@ -14,6 +14,7 @@ namespace Psicologia.Infrastructure.Contexts
 
         public DbSet<Logradouro> Logradouros { get; set; }
         public DbSet<NumeroEndereco> NumeroEnderecos { get; set; }
+        public DbSet<Bairro> Bairros { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

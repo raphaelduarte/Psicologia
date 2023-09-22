@@ -13,29 +13,41 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlServer("Data Source=desktop-i4tk8nf\\sqlexpress;Initial Catalog=HahnDb;Integrated Security=True;Trusted_Connection=True;Encrypt=False"));
 builder.Services.AddControllers();
 builder.Services.AddControllers()
-    .AddFluentValidation(config => 
+    .AddFluentValidation(config =>
         config.RegisterValidatorsFromAssemblyContaining<CreateLogradouroValidator>())
-    
-    .AddFluentValidation(config => 
-        config.RegisterValidatorsFromAssemblyContaining<UpdateLogradouroValidator>())
-    
-    .AddFluentValidation(config => 
-        config.RegisterValidatorsFromAssemblyContaining<RemoveLogradouroValidator>())
-    
-    .AddFluentValidation(config => 
-    config.RegisterValidatorsFromAssemblyContaining<RemoveNumeroEnderecoValidator>())
 
-    .AddFluentValidation(config => 
-    config.RegisterValidatorsFromAssemblyContaining<UpdateNumeroEnderecoValidator>())
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<UpdateLogradouroValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<RemoveLogradouroValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<RemoveNumeroEnderecoValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<UpdateNumeroEnderecoValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<CreateNumeroEnderecoValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<RemoveBairroValidator>())
     
-    .AddFluentValidation(config => 
-    config.RegisterValidatorsFromAssemblyContaining<CreateNumeroEnderecoValidator>());
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<UpdateBairroValidator>())
+    
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<CreateBairroValidator>());
 
 builder.Services.AddTransient<ILogradouroRepository, LogradouroRepository>();
 builder.Services.AddTransient<LogradouroHandler, LogradouroHandler>();
 
 builder.Services.AddTransient<INumeroEnderecoRepository, NumeroEnderecoRepository>();
 builder.Services.AddTransient<NumeroEnderecoHandler, NumeroEnderecoHandler>();
+
+builder.Services.AddTransient<IBairroRepository, BairroRepository>();
+builder.Services.AddTransient<BairroHandler, BairroHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

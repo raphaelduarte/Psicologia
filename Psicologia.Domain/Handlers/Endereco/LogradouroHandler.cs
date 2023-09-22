@@ -18,6 +18,13 @@ namespace Psicologia.Domain.Handlers.Endereco
         IHandler<UpdateLogradouroCommand>, 
         IHandler<RemoveLogradouroCommand>
     {
+        private readonly ILogradouroRepository _logradouroRepository;
+        
+        public LogradouroHandler(ILogradouroRepository logradouroRepository)
+        {
+            _logradouroRepository = logradouroRepository;
+        }
+        
         public ICommandResult Handle(RemoveLogradouroCommand command)
         {
             var validator = new RemoveLogradouroValidator();
@@ -33,13 +40,7 @@ namespace Psicologia.Domain.Handlers.Endereco
 
             return new GenericCommandResult(true, "Product saved", logradouro);
         }
-
-        private readonly ILogradouroRepository _logradouroRepository;
-
-        public LogradouroHandler(ILogradouroRepository logradouroRepository)
-        {
-            _logradouroRepository = logradouroRepository;
-        }
+        
         public ICommandResult Handle(CreateLogradouroCommand command)
         {
             var validator = new CreateLogradouroValidator();
