@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Commands\Contracts\" />
     <Folder Include="Handlers\Contracts\" />
-    <Folder Include="Repositories\Endereco\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,11 +13,18 @@ namespace Psicologia.Infrastructure.Contexts
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Logradouro> Logradouros { get; set; }
+        public DbSet<NumeroEndereco> NumeroEnderecos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Logradouro>().Property(x => x.Id);
             modelBuilder.Entity<Logradouro>().Property(x => x.LogradouroName).HasMaxLength(255);
+
+            modelBuilder.Entity<NumeroEndereco>().Property(x => x.Id);
+            modelBuilder.Entity<NumeroEndereco>().Property(x => x.Numero).HasMaxLength(50);
+            
+            modelBuilder.Entity<Bairro>().Property(x => x.Id);
+            modelBuilder.Entity<Bairro>().Property(x => x.BairroName).HasMaxLength(255);
         }
     }
 }

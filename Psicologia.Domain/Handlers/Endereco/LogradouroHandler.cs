@@ -18,6 +18,22 @@ namespace Psicologia.Domain.Handlers.Endereco
         IHandler<UpdateLogradouroCommand>, 
         IHandler<RemoveLogradouroCommand>
     {
+        public ICommandResult Handle(RemoveLogradouroCommand command)
+        {
+            var validator = new RemoveLogradouroValidator();
+            var validation = validator.Validate(command);
+
+            if (validation.IsValid == false)
+            {
+                return new GenericCommandResult(false, "Ops, it is not valid", command);
+            };
+
+            var logradouro = _logradouroRepository.GetById(command.Id);
+            _logradouroRepository.Remove(logradouro);
+
+            return new GenericCommandResult(true, "Product saved", logradouro);
+        }
+
         private readonly ILogradouroRepository _logradouroRepository;
 
         public LogradouroHandler(ILogradouroRepository logradouroRepository)
@@ -51,26 +67,9 @@ namespace Psicologia.Domain.Handlers.Endereco
             }
 
             var logradouroCommand = _logradouroRepository.GetById(command.Id);
-            var logradouro = new Logradouro(logradouroCommand.LogradouroName);
-            _logradouroRepository.Update(logradouro);
+            _logradouroRepository.Update(logradouroCommand);
 
-            return new GenericCommandResult(true, "Product saved", logradouro);
-        }
-
-        public ICommandResult Handle(RemoveLogradouroCommand command)
-        {
-            var validator = new RemoveLogradouroValidator();
-            var validation = validator.Validate(command);
-
-            if (validation.IsValid == false)
-            {
-                return new GenericCommandResult(false, "Ops, it is not valid", command);
-            };
-
-            var logradouro = _logradouroRepository.GetById(command.Id);
-            _logradouroRepository.Remove(logradouro);
-
-            return new GenericCommandResult(true, "Product saved", logradouro);
+            return new GenericCommandResult(true, "Product saved", logradouroCommand);
         }
     }
 }
