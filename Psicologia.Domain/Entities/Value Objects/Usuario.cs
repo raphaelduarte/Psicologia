@@ -27,12 +27,12 @@ namespace Psicologia.Domain.Entities.Value_Objects
             DataNascimentoId = dataNascimentoId;
 
         }
-        private Guid NomeCompletoId { get; set; }
-        private Guid CpfId { get; set; }
-        private Guid EnderecoCompletoId { get; set; }
-        private Guid TelefoneId { get; set; }
-        private Guid EmailId { get; set; }
-        private Guid DataNascimentoId { get; set; }
-        private ETipoUsuario ETipoUsuario { get; set; }
+        public Guid NomeCompletoId { get; private set; }
+        public Guid CpfId { get; private set; }
+        public Guid EnderecoCompletoId { get; private set; }
+        public Guid TelefoneId { get; private set; }
+        public Guid EmailId { get; private set; }
+        public Guid DataNascimentoId { get; private set; }
+        public ETipoUsuario ETipoUsuario { get; private set; }
     }
 }
