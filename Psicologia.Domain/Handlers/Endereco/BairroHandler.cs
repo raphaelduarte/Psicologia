@@ -55,6 +55,13 @@ public class BairroHandler :
     public ICommandResult Handle(UpdateBairroCommand command)
     {
         var validator = new UpdateBairroValidator();
+        var validation = validator.Validate(command);
+        
+        if (validation.IsValid == false)
+        {
+            return new GenericCommandResult(false, "Ops, it is not valid", command);
+        }
+        
         var bairro = _bairroRepository.GetById(command.Id);
         
         _bairroRepository.Update(bairro);

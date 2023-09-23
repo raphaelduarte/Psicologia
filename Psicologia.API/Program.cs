@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Psicologia.Domain.Handlers.Endereco;
 using Psicologia.Domain.Repositories.Endereco;
+using Psicologia.Domain.Validator.Endereco.Cidade;
 using Psicologia.Domain.Validator.Endereco.Logradouro;
 using Psicologia.Domain.Validator.Endereco.NumeroEndereco;
 using Psicologia.Infrastructure.Contexts;
@@ -38,7 +39,16 @@ builder.Services.AddControllers()
         config.RegisterValidatorsFromAssemblyContaining<UpdateBairroValidator>())
     
     .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateBairroValidator>());
+        config.RegisterValidatorsFromAssemblyContaining<CreateBairroValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<RemoveCidadeValidator>())
+    
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<UpdateCidadeValidator>())
+    
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<CreateCidadeValidator>());
 
 builder.Services.AddTransient<ILogradouroRepository, LogradouroRepository>();
 builder.Services.AddTransient<LogradouroHandler, LogradouroHandler>();
@@ -48,6 +58,9 @@ builder.Services.AddTransient<NumeroEnderecoHandler, NumeroEnderecoHandler>();
 
 builder.Services.AddTransient<IBairroRepository, BairroRepository>();
 builder.Services.AddTransient<BairroHandler, BairroHandler>();
+
+builder.Services.AddTransient<ICidadeRepository, CidadeRepository>();
+builder.Services.AddTransient<CidadeHandler, CidadeHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
