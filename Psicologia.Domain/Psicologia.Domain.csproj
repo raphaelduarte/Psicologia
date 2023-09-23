@@ -17,4 +17,16 @@
     <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Validator\Endereco\BairroCidade\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Validator\Endereco\BairroCidade\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Validator\Endereco\BairroCidade\**" />
+  </ItemGroup>
+
 </Project>

@@ -49,7 +49,7 @@ public class BairroHandler :
         var bairro = _bairroRepository.GetById(command.Id);
         _bairroRepository.Remove(bairro);
         
-        return new GenericCommandResult(true, "Product saved", bairro);
+        return new GenericCommandResult(true, "Bairro saved", bairro);
     }
 
     public ICommandResult Handle(UpdateBairroCommand command)
@@ -66,6 +66,6 @@ public class BairroHandler :
         
         _bairroRepository.Update(bairro);
         
-        return new GenericCommandResult(true, "Product saved", bairro);
+        return new GenericCommandResult(true, "Bairro saved", bairro);
     }
 }

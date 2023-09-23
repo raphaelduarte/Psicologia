@@ -16,6 +16,7 @@ namespace Psicologia.Infrastructure.Contexts
         public DbSet<NumeroEndereco> NumeroEnderecos { get; set; }
         public DbSet<Bairro> Bairros { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
+        public DbSet<BairroCidade> BairrosCidades { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +31,8 @@ namespace Psicologia.Infrastructure.Contexts
             
             modelBuilder.Entity<Cidade>().Property(x => x.Id);
             modelBuilder.Entity<Cidade>().Property(x => x.CidadeName).HasMaxLength(50);
+            
+            modelBuilder.Entity<BairroCidade>().Property(x => x.Id);
         }
     }
 }
