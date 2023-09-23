@@ -15,9 +15,9 @@ public class CidadeHandler :
 {
     private readonly ICidadeRepository _cidadeRepository;
 
-    public CidadeHandler(ICidadeRepository _cidadeRepository)
+    public CidadeHandler(ICidadeRepository cidadeRepository)
     {
-        _cidadeRepository = _cidadeRepository;
+        _cidadeRepository = cidadeRepository;
     }
     public ICommandResult Handle(CreateCidadeCommand command)
     {

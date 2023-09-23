@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Psicologia.Domain.Handlers.Endereco;
 using Psicologia.Domain.Repositories.Endereco;
 using Psicologia.Domain.Validator.Endereco.Cidade;
+using Psicologia.Domain.Validator.Endereco.Estado;
 using Psicologia.Domain.Validator.Endereco.Logradouro;
 using Psicologia.Domain.Validator.Endereco.NumeroEndereco;
 using Psicologia.Infrastructure.Contexts;
@@ -11,7 +12,9 @@ using Psicologia.Infrastructure.Repositories.Endereco;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlServer("Data Source=desktop-i4tk8nf\\sqlexpress;Initial Catalog=HahnDb;Integrated Security=True;Trusted_Connection=True;Encrypt=False"));
+builder.Services.AddDbContext<DataContext>(opt => 
+    opt.UseSqlServer("Data Source=desktop-i4tk8nf\\sqlexpress;Initial Catalog=HahnDb;Integrated Security=True;Trusted_Connection=True;Encrypt=False"));
+
 builder.Services.AddControllers();
 builder.Services.AddControllers()
     .AddFluentValidation(config =>
@@ -48,7 +51,16 @@ builder.Services.AddControllers()
         config.RegisterValidatorsFromAssemblyContaining<UpdateCidadeValidator>())
     
     .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateCidadeValidator>());
+        config.RegisterValidatorsFromAssemblyContaining<CreateCidadeValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<RemoveEstadoValidator>())
+    
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<UpdateEstadoValidator>())
+    
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<CreateEstadoValidator>());
 
 builder.Services.AddTransient<ILogradouroRepository, LogradouroRepository>();
 builder.Services.AddTransient<LogradouroHandler, LogradouroHandler>();
@@ -64,6 +76,9 @@ builder.Services.AddTransient<CidadeHandler, CidadeHandler>();
 
 builder.Services.AddTransient<IBairroCidadeRepository, BairroCidadeRepository>();
 builder.Services.AddTransient<BairroCidadeHandler, BairroCidadeHandler>();
+
+builder.Services.AddTransient<IEstadoRepository, EstadoRepository>();
+builder.Services.AddTransient<EstadoHandler, EstadoHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

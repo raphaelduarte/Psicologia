@@ -17,6 +17,7 @@ namespace Psicologia.Infrastructure.Contexts
         public DbSet<Bairro> Bairros { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<BairroCidade> BairrosCidades { get; set; }
+        public DbSet<Estado> Estados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,12 +28,15 @@ namespace Psicologia.Infrastructure.Contexts
             modelBuilder.Entity<NumeroEndereco>().Property(x => x.Numero).HasMaxLength(50);
             
             modelBuilder.Entity<Bairro>().Property(x => x.Id);
-            modelBuilder.Entity<Bairro>().Property(x => x.BairroName).HasMaxLength(255);
+            modelBuilder.Entity<Bairro>().Property(x => x.BairroName).HasMaxLength(50);
             
             modelBuilder.Entity<Cidade>().Property(x => x.Id);
             modelBuilder.Entity<Cidade>().Property(x => x.CidadeName).HasMaxLength(50);
             
             modelBuilder.Entity<BairroCidade>().Property(x => x.Id);
+            
+            modelBuilder.Entity<Estado>().Property(x => x.Id);
+            modelBuilder.Entity<Estado>().Property(x => x.EstadoName).HasMaxLength(50);
         }
     }
 }

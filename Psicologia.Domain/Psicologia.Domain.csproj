@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Compile Remove="Validator\Endereco\BairroCidade\**" />
+    <Compile Remove="Repositories\Endereco\EstadoRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>
