@@ -33,28 +33,12 @@ public class EnderecoRepository : IEnderecoRepository
         _context.SaveChanges();
     }
 
-    public Domain.Entities.Endereco.Endereco GetById(
-        Guid idLogradouro,
-        Guid idNumero,
-        Guid idBairroCidade,
-        Guid idCidadeEstado,
-        Guid idPais)
+    public Domain.Entities.Endereco.Endereco GetById(Guid id)
     {
-        _context.Enderecos.FirstOrDefault(x => 
-            x.Logradouro == idLogradouro &&
-            x.Numero == idNumero &&
-            x.BairroCidade == idBairroCidade &&
-            x.CidadeEstado == idCidadeEstado &&
-            x.Pais == idPais
-            );
+        _context.Enderecos.FirstOrDefault(x => x.Id == id);
         return _context
             .Enderecos
-            .FirstOrDefault(x =>
-                x.Logradouro == x.Logradouro &&
-                x.Numero == x.Numero &&
-                x.BairroCidade == x.BairroCidade &&
-                x.CidadeEstado == x.CidadeEstado &&
-                x.Pais == x.Pais);
+            .FirstOrDefault(x => x.Id == id);
     }
 
     public IEnumerable<Domain.Entities.Endereco.Endereco> GetAll()

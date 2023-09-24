@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Psicologia.Domain.Entities.Endereco;
 
 namespace Psicologia.Domain.Commands.Endereco;
 
@@ -10,22 +11,26 @@ public class CreateEnderecoCommand
     }
 
     public CreateEnderecoCommand(
-        Guid idLogradouro,
-        Guid idNumero,
-        Guid idBairroCidade,
-        Guid idCidadeEstado,
-        Guid idPais)
+        Entities.Endereco.Logradouro logradouro,
+        Entities.Endereco.NumeroEndereco numero,
+        ETipoResidencia eTipoResidencia,
+        Entities.Endereco.BairroCidade bairroCidade,
+        Entities.Endereco.CidadeEstado cidadeEstado,
+        Entities.Endereco.Pais pais)
     {
-        IdLogradouro = idLogradouro;
-        IdNumero = idNumero;
-        IdBairroCidade = idBairroCidade;
-        IdCidadeEstado = idCidadeEstado;
-        IdPais = idPais;
+        Logradouro = logradouro.Id;
+        Numero = numero.Id;
+        ETipoResidencia = eTipoResidencia;
+        BairroCidade = bairroCidade.Id;
+        CidadeEstado = cidadeEstado.Id;
+        Pais = pais.Id;
+        
     }
 
-    public Guid IdLogradouro { get; private set; }
-    public Guid IdNumero { get; private set; }
-    public Guid IdBairroCidade { get; private set; }
-    public Guid IdCidadeEstado { get; private set; }
-    public Guid IdPais { get; private set; }
+    public Guid Logradouro { get; private set; }
+    public Guid Numero { get; private set; }
+    public Guid BairroCidade { get; private set; }
+    public Guid CidadeEstado { get; private set; }
+    public Guid Pais { get; private set; }
+    public ETipoResidencia ETipoResidencia { get; private set; }
 }

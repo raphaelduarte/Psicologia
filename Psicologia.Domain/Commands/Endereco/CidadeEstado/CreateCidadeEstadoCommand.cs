@@ -7,12 +7,19 @@ public class CreateCidadeEstadoCommand
         
     }
 
-    public CreateCidadeEstadoCommand(Guid idCidade, Guid idEstado)
+    public CreateCidadeEstadoCommand(
+        Entities.Endereco.Cidade cidade,
+        Entities.Endereco.Estado estado)
     {
-        IdCidade = idCidade;
-        IdEstado = idEstado;
+        IdCidade = cidade.Id;
+        IdEstado = estado.Id;
+        Cidade = cidade.CidadeName;
+        Estado = estado.EstadoName;
+
     }
 
     public Guid IdCidade { get; private set; }
     public Guid IdEstado { get; private set; }
+    public string Cidade { get; private set; }
+    public string Estado { get; private set; }
 }

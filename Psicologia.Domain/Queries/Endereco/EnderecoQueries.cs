@@ -1,31 +1,18 @@
 ﻿using System.Linq.Expressions;
+using Psicologia.Domain.Repositories.Endereco;
 
 namespace Psicologia.Domain.Queries.Endereco;
 
 public static class EnderecoQueries
 {
     public static Expression<Func<Entities.Endereco.Endereco, bool>> GetAll(
-        Guid idLogradouro,
-        Guid idNumero,
-        Guid idBairroCidade,
-        Guid idCidadeEstado,
-        Guid idPais)
+        Guid id)
     {
-        return x =>
-            x.Logradouro == idLogradouro &&
-            x.Numero == idNumero &&
-            x.BairroCidade == idBairroCidade &&
-            x.CidadeEstado == idCidadeEstado &&
-            x.Pais == idPais;
+        return x => x.Id == id;
     }
     
     public static Expression<Func<Entities.Endereco.Endereco, bool>> GetAll()
     {
-        return x =>
-            x.Logradouro == x.Logradouro &&
-            x.Numero == x.Numero &&
-            x.BairroCidade == x.BairroCidade &&
-            x.CidadeEstado == x.CidadeEstado &&
-            x.Pais == x.Pais;
+        return x => x.Id == x.Id;
     }
 }

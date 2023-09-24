@@ -93,8 +93,8 @@ public class CidadeEstadoHandler :
         var cidadeHandler = new CidadeHandler(_cidadeRepository);
         var estadoHandler = new EstadoHandler(_estadoRepository);
 
-        cidadeHandler.Handle(_updateCidadeCommand);
-        estadoHandler.Handle(_updateEstadoCommand);
+        cidadeHandler.Handle(_removeCidadeCommand);
+        estadoHandler.Handle(_removeEstadoCommand);
         
         var cidadeEstado = _cidadeEstadoRepository.GetById(
             command.IdCidadeEstado);
