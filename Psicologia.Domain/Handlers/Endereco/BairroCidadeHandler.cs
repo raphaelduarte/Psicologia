@@ -22,10 +22,16 @@ public class BairroCidadeHandler :
     
     public ICommandResult Handle(CreateBairroCidadeCommand command)
     {
-        var bairroCidade = new BairroCidade(command.IdBairro, command.IdCidade);
+        var bairroCidade = new BairroCidade(
+            command.IdBairro,
+            command.IdCidade);
+        
         _bairroCidadeRepository.Create(bairroCidade);
         
-        return new GenericCommandResult(true, "Bairro saved", bairroCidade);
+        return new GenericCommandResult(
+            true,
+            "Bairro saved",
+            bairroCidade);
     }
 
     public ICommandResult Handle(UpdateBairroCidadeCommand command)
@@ -36,7 +42,10 @@ public class BairroCidadeHandler :
         
         _bairroCidadeRepository.Update(bairroCidade);
         
-        return new GenericCommandResult(true, "BairroCidade saved", bairroCidade);
+        return new GenericCommandResult(
+            true,
+            "BairroCidade saved",
+            bairroCidade);
     }
 
     public ICommandResult Handle(RemoveBairroCidadeCommand command)
@@ -47,6 +56,9 @@ public class BairroCidadeHandler :
         
         _bairroCidadeRepository.Remove(bairroCidade);
         
-        return new GenericCommandResult(true, "Bairro saved", bairroCidade);
+        return new GenericCommandResult(
+            true,
+            "Bairro saved",
+            bairroCidade);
     }
 }
