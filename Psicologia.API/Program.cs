@@ -96,6 +96,9 @@ builder.Services.AddTransient<CidadeEstadoHandler, CidadeEstadoHandler>();
 builder.Services.AddTransient<IPaisRepository, PaisRepository>();
 builder.Services.AddTransient<PaisHandler, PaisHandler>();
 
+builder.Services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

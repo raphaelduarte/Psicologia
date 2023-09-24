@@ -20,6 +20,7 @@ namespace Psicologia.Infrastructure.Contexts
         public DbSet<Estado> Estados { get; set; }
         public DbSet<CidadeEstado> CidadesEstados { get; set; }
         public DbSet<Pais> Paises { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +45,15 @@ namespace Psicologia.Infrastructure.Contexts
             
             modelBuilder.Entity<Pais>().Property(x => x.Id);
             modelBuilder.Entity<Pais>().Property(x => x.PaisName).HasMaxLength(50);
+            
+            
+            modelBuilder.Entity<Endereco>().Property(x => x.Id);
+            modelBuilder.Entity<Endereco>().Property(x => x.Logradouro);
+            modelBuilder.Entity<Endereco>().Property(x => x.Numero);
+            modelBuilder.Entity<Endereco>().Property(x => x.ETipoResidencia);
+            modelBuilder.Entity<Endereco>().Property(x => x.BairroCidade);
+            modelBuilder.Entity<Endereco>().Property(x => x.CidadeEstado);
+            modelBuilder.Entity<Endereco>().Property(x => x.Pais);
         }
     }
 }
