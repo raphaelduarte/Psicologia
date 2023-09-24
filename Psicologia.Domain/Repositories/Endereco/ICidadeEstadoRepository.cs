@@ -7,6 +7,6 @@ public interface ICidadeEstadoRepository
     void Create(CidadeEstado cidadeEstado);
     void Update(CidadeEstado cidadeEstado);
     void Remove(CidadeEstado cidadeEstado);
-    CidadeEstado GetById(Guid idCidade, Guid idEstado);
+    CidadeEstado GetById(Guid idCidadeEstado);
     IEnumerable<CidadeEstado> GetAll();
 }

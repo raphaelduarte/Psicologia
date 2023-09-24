@@ -32,16 +32,14 @@ public class BairroCidadeRepository : IBairroCidadeRepository
         _context.SaveChanges();
     }
 
-    public BairroCidade GetById(Guid idBairro, Guid idCidade)
+    public BairroCidade GetById(Guid idBairroCidade)
     {
         _context.BairrosCidades.FirstOrDefault(x => 
-            x.Bairro == idBairro &&
-            x.Cidade == idCidade);
+            x.Id == idBairroCidade);
         return _context
             .BairrosCidades
             .FirstOrDefault(x => 
-                x.Bairro == idBairro &&
-                x.Cidade == idCidade);
+                x.Id == idBairroCidade);
     }
 
     public IEnumerable<BairroCidade> GetAll()

@@ -7,12 +7,21 @@ public class UpdateCidadeEstadoCommand
         
     }
 
-    public UpdateCidadeEstadoCommand(Guid idCidade, Guid idEstado)
+    public UpdateCidadeEstadoCommand(
+        Guid idCidadeEstado,
+        Entities.Endereco.Cidade cidade,
+        Entities.Endereco.Estado estado)
     {
-        IdCidade = idCidade;
-        IdEstado = idEstado;
+        IdCidadeEstado = idCidadeEstado;
+        IdCidade = cidade.Id;
+        IdEstado = estado.Id;
+        Cidade = cidade.CidadeName;
+        Estado = estado.EstadoName;
     }
 
+    public Guid IdCidadeEstado { get; private set; }
     public Guid IdCidade { get; private set; }
     public Guid IdEstado { get; private set; }
+    public string Cidade { get; private set; }
+    public string Estado { get; private set; }
 }

@@ -7,14 +7,20 @@ public class UpdateBairroCidadeCommand
         
     }
 
-    public UpdateBairroCidadeCommand(Guid idBairro, string bairroName, Guid idCidade, string cidadeName)
+    public UpdateBairroCidadeCommand(
+        Guid idBairroCidade,
+        Entities.Endereco.Bairro bairro,
+        Entities.Endereco.Cidade cidade
+    )
     {
-        IdBairro = idBairro;
-        IdCidade = idCidade;
-        BairroName = bairroName;
-        CidadeName = cidadeName;
+        IdBairroCidade = idBairroCidade;
+        IdBairro = bairro.Id;
+        IdCidade = cidade.Id;
+        BairroName = bairro.BairroName;
+        CidadeName = cidade.CidadeName;
     }
 
+    public Guid IdBairroCidade { get; private set; }
     public Guid IdBairro { get; private set; }
     public Guid IdCidade { get; private set; }
     public string BairroName { get; private set; }

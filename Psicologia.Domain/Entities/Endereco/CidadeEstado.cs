@@ -8,12 +8,15 @@ namespace Psicologia.Domain.Entities.Endereco
 {
     public class CidadeEstado : Entity
     {
-        public CidadeEstado(Guid cidade, Guid estado)
+        public CidadeEstado(
+            Cidade cidade,
+            Estado estado)
         {
             Cidade = cidade;
             Estado = estado;
         }
-        public Guid Cidade { get; private set; }
-        public Guid Estado { get; private set; }
+
+        public Cidade Cidade { get; private set; }
+        public Estado Estado { get; private set; }
     }
 }

@@ -5,14 +5,13 @@ namespace Psicologia.Domain.Queries.Endereco;
 
 public static class CidadeEstadoQueries
 {
-    public static Expression<Func<CidadeEstado, bool>> GetAll(Guid idCidade, Guid idEstado)
+    public static Expression<Func<CidadeEstado, bool>> GetAll(Guid idCidadeEstado)
     {
-        return x => x.Cidade == idCidade && x.Estado == idEstado;
+        return x => x.Id == idCidadeEstado;
     }
 
     public static Expression<Func<CidadeEstado, bool>> GetAll()
     {
-        return x => x.Cidade == x.Cidade &&
-                    x.Estado == x.Estado;
+        return x => x.Id == x.Id;
     }
 }

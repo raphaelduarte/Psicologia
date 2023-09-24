@@ -33,16 +33,14 @@ public class CidadeEstadoRepository : ICidadeEstadoRepository
         _context.SaveChanges();
     }
 
-    public CidadeEstado GetById(Guid idCidade, Guid idEstado)
+    public CidadeEstado GetById(Guid idCidadeEstado)
     {
         _context.CidadesEstados.FirstOrDefault(x => 
-            x.Cidade == idCidade &&
-            x.Estado == idEstado);
+            x.Id == idCidadeEstado);
         return _context
             .CidadesEstados
             .FirstOrDefault(x => 
-                x.Cidade == idCidade &&
-                x.Estado == idEstado);
+                x.Id == idCidadeEstado);
     }
 
     public IEnumerable<CidadeEstado> GetAll()
