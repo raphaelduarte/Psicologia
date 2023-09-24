@@ -3,7 +3,8 @@ using Psicologia.Domain.Commands.Endereco.Estado;
 
 namespace Psicologia.Domain.Validator.Endereco.Estado;
 
-public class CreateEstadoValidator : AbstractValidator<CreateEstadoCommand>
+public class CreateEstadoValidator : 
+    AbstractValidator<CreateEstadoCommand>
 {
     public CreateEstadoValidator()
     {

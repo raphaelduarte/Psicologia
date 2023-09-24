@@ -1,27 +1,28 @@
 ﻿using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Contracts;
-using Psicologia.Domain.Commands.Endereco.Estado;
+using Psicologia.Domain.Commands.Endereco.Pais;
 using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Handlers.Contracts;
 using Psicologia.Domain.Repositories.Endereco;
-using Psicologia.Domain.Validator.Endereco.Estado;
+using Psicologia.Domain.Validator.Endereco.Pais;
 
 namespace Psicologia.Domain.Handlers.Endereco;
 
-public class EstadoHandler :
-    IHandler<CreateEstadoCommand>,
-    IHandler<UpdateEstadoCommand>,
-    IHandler<RemoveEstadoCommand>
+public class PaisHandler :
+    IHandler<CreatePaisCommand>,
+    IHandler<UpdatePaisCommand>,
+    IHandler<RemovePaisCommand>
 {
-    private readonly IEstadoRepository _estadoRepository;
+    private readonly IPaisRepository _paisRepository;
 
-    public EstadoHandler(IEstadoRepository estadoRepository)
+    public PaisHandler(IPaisRepository paisRepository)
     {
-        _estadoRepository = estadoRepository;
+        _paisRepository = paisRepository;
     }
-    public ICommandResult Handle(CreateEstadoCommand command)
+    
+    public ICommandResult Handle(CreatePaisCommand command)
     {
-        var validator = new CreateEstadoValidator();
+        var validator = new CreatePaisValidator();
         var validation = validator.Validate(command);
         
         if (validation.IsValid == false)
@@ -32,18 +33,18 @@ public class EstadoHandler :
                 command);
         }
 
-        var estado = new Estado(command.EstadoName);
-        _estadoRepository.Create(estado);
+        var pais = new Pais(command.PaisName);
+        _paisRepository.Create(pais);
         
         return new GenericCommandResult(
             true,
-            "Estado saved",
-            estado);
+            "País saved",
+            pais);
     }
 
-    public ICommandResult Handle(UpdateEstadoCommand command)
+    public ICommandResult Handle(UpdatePaisCommand command)
     {
-        var validator = new UpdateEstadoValidator();
+        var validator = new UpdatePaisValidator();
         var validation = validator.Validate(command);
         
         if (validation.IsValid == false)
@@ -54,18 +55,18 @@ public class EstadoHandler :
                 command);
         }
 
-        var estado = _estadoRepository.GetById(command.IdEstado);
-        _estadoRepository.Update(estado);
+        var pais = _paisRepository.GetById(command.IdPais);
+        _paisRepository.Update(pais);
         
         return new GenericCommandResult(
             true,
-            "Estado saved",
-            estado);
+            "País saved",
+            pais);
     }
 
-    public ICommandResult Handle(RemoveEstadoCommand command)
+    public ICommandResult Handle(RemovePaisCommand command)
     {
-        var validator = new RemoveEstadoValidator();
+        var validator = new RemovePaisValidator();
         var validation = validator.Validate(command);
         
         if (validation.IsValid == false)
@@ -76,12 +77,12 @@ public class EstadoHandler :
                 command);
         }
 
-        var estado = _estadoRepository.GetById(command.IdEstado);
-        _estadoRepository.Remove(estado);
+        var pais = _paisRepository.GetById(command.IdPais);
+        _paisRepository.Remove(pais);
         
         return new GenericCommandResult(
             true,
-            "Estado saved",
-            estado);
+            "País saved",
+            pais);
     }
 }

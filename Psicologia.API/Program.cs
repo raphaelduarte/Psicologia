@@ -6,6 +6,7 @@ using Psicologia.Domain.Validator.Endereco.Cidade;
 using Psicologia.Domain.Validator.Endereco.Estado;
 using Psicologia.Domain.Validator.Endereco.Logradouro;
 using Psicologia.Domain.Validator.Endereco.NumeroEndereco;
+using Psicologia.Domain.Validator.Endereco.Pais;
 using Psicologia.Infrastructure.Contexts;
 using Psicologia.Infrastructure.Repositories.Endereco;
 
@@ -60,7 +61,16 @@ builder.Services.AddControllers()
         config.RegisterValidatorsFromAssemblyContaining<UpdateEstadoValidator>())
     
     .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateEstadoValidator>());
+        config.RegisterValidatorsFromAssemblyContaining<CreateEstadoValidator>())
+
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<RemovePaisValidator>())
+    
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<UpdatePaisValidator>())
+    
+    .AddFluentValidation(config =>
+        config.RegisterValidatorsFromAssemblyContaining<CreatePaisValidator>());
 
 builder.Services.AddTransient<ILogradouroRepository, LogradouroRepository>();
 builder.Services.AddTransient<LogradouroHandler, LogradouroHandler>();
@@ -82,6 +92,9 @@ builder.Services.AddTransient<EstadoHandler, EstadoHandler>();
 
 builder.Services.AddTransient<ICidadeEstadoRepository, CidadeEstadoRepository>();
 builder.Services.AddTransient<CidadeEstadoHandler, CidadeEstadoHandler>();
+
+builder.Services.AddTransient<IPaisRepository, PaisRepository>();
+builder.Services.AddTransient<PaisHandler, PaisHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
