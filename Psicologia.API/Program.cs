@@ -97,6 +97,7 @@ builder.Services.AddTransient<IPaisRepository, PaisRepository>();
 builder.Services.AddTransient<PaisHandler, PaisHandler>();
 
 builder.Services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+builder.Services.AddTransient<EnderecoHandler, EnderecoHandler>();
 
 
 builder.Services.AddControllers();

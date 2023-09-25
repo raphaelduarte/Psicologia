@@ -11,6 +11,7 @@ public class CreateEnderecoCommand
     }
 
     public CreateEnderecoCommand(
+        Guid idEndereco,
         Entities.Endereco.Logradouro logradouro,
         Entities.Endereco.NumeroEndereco numero,
         ETipoResidencia eTipoResidencia,
@@ -18,6 +19,7 @@ public class CreateEnderecoCommand
         Entities.Endereco.CidadeEstado cidadeEstado,
         Entities.Endereco.Pais pais)
     {
+        IdEndereco = idEndereco;
         Logradouro = logradouro.Id;
         Numero = numero.Id;
         ETipoResidencia = eTipoResidencia;
@@ -27,6 +29,7 @@ public class CreateEnderecoCommand
         
     }
 
+    public Guid IdEndereco { get; private set; }
     public Guid Logradouro { get; private set; }
     public Guid Numero { get; private set; }
     public Guid BairroCidade { get; private set; }
