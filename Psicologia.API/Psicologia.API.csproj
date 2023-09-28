@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Psicologia.Infrastructure\Psicologia.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
+  </ItemGroup>
+
 </Project>

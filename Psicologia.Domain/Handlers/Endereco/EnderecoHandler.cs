@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using FluentValidation;
 using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Contracts;
 using Psicologia.Domain.Commands.Endereco;
@@ -12,6 +13,7 @@ using Psicologia.Domain.Commands.Endereco.Pais;
 using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Handlers.Contracts;
 using Psicologia.Domain.Repositories.Endereco;
+using Psicologia.Domain.Validator.Endereco.Logradouro;
 
 namespace Psicologia.Domain.Handlers.Endereco;
 
@@ -128,7 +130,7 @@ public class EnderecoHandler :
         estadoHandler.Handle(_createEstadoCommand);
         paisHandler.Handle(_createPaisCommand);
         
-        var logradouro = _logradouroRepository.GetById(command.Logradouro);
+        var logradouro = _logradouroRepository.GetById(command.Logradouro); 
         var numero = _numeroEnderecoRepository.GetById(command.Numero);
        var eTipoResidencia = _eTipoResidencia;
        var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade);
