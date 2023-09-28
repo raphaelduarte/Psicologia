@@ -129,7 +129,7 @@ public class EnderecoHandler :
         paisHandler.Handle(_createPaisCommand);
         
         var logradouro = _logradouroRepository.GetById(command.Logradouro);
-       var numero = _numeroEnderecoRepository.GetById(command.Numero);
+        var numero = _numeroEnderecoRepository.GetById(command.Numero);
        var eTipoResidencia = _eTipoResidencia;
        var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade);
        var cidadeEstado = _cidadeEstadoRepository.GetById(command.CidadeEstado);
