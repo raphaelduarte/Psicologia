@@ -20,6 +20,15 @@ public class EnderecoController : ControllerBase
         return repository.GetAll();
     }
 
+    [Route("{id:Guid}")]
+    [HttpGet]
+    public Domain.Entities.Endereco.Endereco GetById(
+        [FromRoute] Guid id,
+        [FromServices] IEnderecoRepository repository)
+    {
+        return repository.GetById(id);
+    }
+
     [Route("")]
     [HttpPost]
     public GenericCommandResult Create(

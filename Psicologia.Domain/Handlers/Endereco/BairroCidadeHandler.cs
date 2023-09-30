@@ -18,47 +18,25 @@ public class BairroCidadeHandler :
     private readonly IBairroCidadeRepository _bairroCidadeRepository;
     private readonly IBairroRepository _bairroRepository;
     private readonly ICidadeRepository _cidadeRepository;
-    private readonly CreateBairroCommand _createBairroCommand;
-    private readonly CreateCidadeCommand _createCidadeCommand;
-    private readonly UpdateBairroCommand _updateBairroCommand;
-    private readonly UpdateCidadeCommand _updateCidadeCommand;
-    private readonly RemoveBairroCommand _removeBairroCommand;
-    private readonly RemoveCidadeCommand _removeCidadeCommand;
-    
     public BairroCidadeHandler(
         IBairroCidadeRepository bairroCidadeRepository,
         IBairroRepository bairroRepository,
-        ICidadeRepository cidadeRepository,
-        CreateBairroCommand createBairroCommand,
-        CreateCidadeCommand createCidadeCommand,
-        UpdateBairroCommand updateBairroCommand,
-        UpdateCidadeCommand updateCidadeCommand,
-        RemoveBairroCommand removeBairroCommand,
-        RemoveCidadeCommand removeCidadeCommand)
+        ICidadeRepository cidadeRepository
+    )
     {
         _bairroCidadeRepository = bairroCidadeRepository;
         _bairroRepository = bairroRepository;
         _cidadeRepository = cidadeRepository;
-        _createBairroCommand = createBairroCommand;
-        _createCidadeCommand = createCidadeCommand;
-        _updateBairroCommand = updateBairroCommand;
-        _updateCidadeCommand = updateCidadeCommand;
-        _removeBairroCommand = removeBairroCommand;
-        _removeCidadeCommand = removeCidadeCommand;
+        ;
     }
     
     
     public ICommandResult Handle(
         CreateBairroCidadeCommand command)
     {
-        var bairroHandler = new BairroHandler(_bairroRepository);
-        var cidadeHandler = new CidadeHandler(_cidadeRepository);
 
-        bairroHandler.Handle(_createBairroCommand);
-        cidadeHandler.Handle(_createCidadeCommand);
-        
-       var bairro = _bairroRepository.GetById(command.IdBairro);
-       var cidade = _cidadeRepository.GetById(command.IdCidade);
+        var bairro = _bairroRepository.GetById(command.Bairro.Id);
+       var cidade = _cidadeRepository.GetById(command.Cidade.Id);
        
         var bairroCidade = new BairroCidade(
             bairro,
@@ -74,12 +52,7 @@ public class BairroCidadeHandler :
 
     public ICommandResult Handle(UpdateBairroCidadeCommand command)
     {
-        var bairroHandler = new BairroHandler(_bairroRepository);
-        var cidadeHandler = new CidadeHandler(_cidadeRepository);
 
-        bairroHandler.Handle(_updateBairroCommand);
-        cidadeHandler.Handle(_updateCidadeCommand);
-        
         var bairroCidade = _bairroCidadeRepository.GetById(
             command.IdBairroCidade);
         
@@ -93,12 +66,7 @@ public class BairroCidadeHandler :
 
     public ICommandResult Handle(RemoveBairroCidadeCommand command)
     {
-        var bairroHandler = new BairroHandler(_bairroRepository);
-        var cidadeHandler = new CidadeHandler(_cidadeRepository);
 
-        bairroHandler.Handle(_removeBairroCommand);
-        cidadeHandler.Handle(_removeCidadeCommand);
-        
         var bairroCidade = _bairroCidadeRepository.GetById(
             command.IdBairroCidade);
         

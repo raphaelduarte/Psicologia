@@ -2,6 +2,8 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Psicologia.Domain.Commands.Contracts;
 using Psicologia.Domain.Commands.Endereco.Bairro;
+using Psicologia.Domain.Commands.Endereco.BairroCidade;
+using Psicologia.Domain.Handlers.Contracts;
 using Psicologia.Domain.Handlers.Endereco;
 using Psicologia.Domain.Repositories.Endereco;
 using Psicologia.Domain.Validator.Endereco.Cidade;
@@ -68,7 +70,6 @@ builder.Services.AddTransient<IPaisRepository, PaisRepository>();
 builder.Services.AddTransient<PaisHandler, PaisHandler>();
 
 builder.Services.AddTransient<IEnderecoRepository, EnderecoRepository>();
-builder.Services.AddTransient<EnderecoHandler, EnderecoHandler>();
 
 
 

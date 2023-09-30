@@ -24,36 +24,41 @@ namespace Psicologia.Infrastructure.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Logradouro>().Property(x => x.Id);
-            modelBuilder.Entity<Logradouro>().Property(x => x.LogradouroName).HasMaxLength(255);
+            modelBuilder.Entity<Logradouro>().HasKey(x => x.Id);
+            modelBuilder.Entity<Logradouro>().Property(x => x.LogradouroName).HasMaxLength(255).HasColumnType("varchar(255)");
 
-            modelBuilder.Entity<NumeroEndereco>().Property(x => x.Id);
+            modelBuilder.Entity<NumeroEndereco>().HasKey(x => x.Id);
             modelBuilder.Entity<NumeroEndereco>().Property(x => x.Numero).HasMaxLength(50);
             
-            modelBuilder.Entity<Bairro>().Property(x => x.Id);
-            modelBuilder.Entity<Bairro>().Property(x => x.BairroName).HasMaxLength(50);
+            modelBuilder.Entity<Bairro>().HasKey(x => x.Id);
+            modelBuilder.Entity<Bairro>().Property(x => x.BairroName).HasMaxLength(50).HasColumnType("varchar(50)");
             
-            modelBuilder.Entity<Cidade>().Property(x => x.Id);
-            modelBuilder.Entity<Cidade>().Property(x => x.CidadeName).HasMaxLength(50);
+            modelBuilder.Entity<Cidade>().HasKey(x => x.Id);
+            modelBuilder.Entity<Cidade>().Property(x => x.CidadeName).HasMaxLength(50).HasColumnType("varchar(50)");
             
-            modelBuilder.Entity<BairroCidade>().Property(x => x.Id);
+            modelBuilder.Entity<BairroCidade>().HasKey(x => x.Id);
+            modelBuilder.Entity<BairroCidade>().Property(x => x.Bairro.Id);
+            modelBuilder.Entity<BairroCidade>().Property(x => x.Cidade.Id);
             
-            modelBuilder.Entity<Estado>().Property(x => x.Id);
-            modelBuilder.Entity<Estado>().Property(x => x.EstadoName).HasMaxLength(50);
             
-            modelBuilder.Entity<CidadeEstado>().Property(x => x.Id);
+            modelBuilder.Entity<Estado>().HasKey(x => x.Id);
+            modelBuilder.Entity<Estado>().Property(x => x.EstadoName).HasMaxLength(50).HasColumnType("varchar(50)");
+            
+            modelBuilder.Entity<CidadeEstado>().HasKey(x => x.Id);
+            modelBuilder.Entity<CidadeEstado>().Property(x => x.Cidade.Id);
+            modelBuilder.Entity<CidadeEstado>().Property(x => x.Estado.Id);
             
             modelBuilder.Entity<Pais>().Property(x => x.Id);
-            modelBuilder.Entity<Pais>().Property(x => x.PaisName).HasMaxLength(50);
+            modelBuilder.Entity<Pais>().Property(x => x.PaisName).HasMaxLength(50).HasColumnType("varchar(50)");
             
             
             modelBuilder.Entity<Endereco>().Property(x => x.Id);
-            modelBuilder.Entity<Endereco>().Property(x => x.Logradouro);
-            modelBuilder.Entity<Endereco>().Property(x => x.Numero);
+            modelBuilder.Entity<Endereco>().Property(x => x.Logradouro.Id);
+            modelBuilder.Entity<Endereco>().Property(x => x.Numero.Id);
             modelBuilder.Entity<Endereco>().Property(x => x.ETipoResidencia);
-            modelBuilder.Entity<Endereco>().Property(x => x.BairroCidade);
-            modelBuilder.Entity<Endereco>().Property(x => x.CidadeEstado);
-            modelBuilder.Entity<Endereco>().Property(x => x.Pais);
+            modelBuilder.Entity<Endereco>().Property(x => x.BairroCidade.Id);
+            modelBuilder.Entity<Endereco>().Property(x => x.CidadeEstado.Id);
+            modelBuilder.Entity<Endereco>().Property(x => x.Pais.Id);
         }
     }
 }

@@ -1,19 +1,9 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using FluentValidation;
-using Psicologia.Domain.Commands;
+﻿using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Contracts;
 using Psicologia.Domain.Commands.Endereco;
-using Psicologia.Domain.Commands.Endereco.Bairro;
-using Psicologia.Domain.Commands.Endereco.Cidade;
-using Psicologia.Domain.Commands.Endereco.Estado;
-using Psicologia.Domain.Commands.Endereco.Logradouro;
-using Psicologia.Domain.Commands.Endereco.NumeroEndereco;
-using Psicologia.Domain.Commands.Endereco.Pais;
 using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Handlers.Contracts;
 using Psicologia.Domain.Repositories.Endereco;
-using Psicologia.Domain.Validator.Endereco.Logradouro;
 using Psicologia.Domain.Entities.Endereco;
 
 namespace Psicologia.Domain.Handlers.Endereco;
@@ -33,28 +23,7 @@ public class EnderecoHandler :
     private readonly IBairroRepository _bairroRepository;
     private readonly ICidadeRepository _cidadeRepository;
     private readonly IEstadoRepository _estadoRepository;
-    private readonly CreatePaisCommand _createPaisCommand;
-    private readonly UpdatePaisCommand _updatePaisCommand;
-    private readonly RemovePaisCommand _removePaisCommand;
-    private readonly CreateEstadoCommand _createEstadoCommand;
-    private readonly CreateCidadeCommand _createCidadeCommand;
-    private readonly UpdateEstadoCommand _updateEstadoCommand;
-    private readonly UpdateCidadeCommand _updateCidadeCommand;
-    private readonly RemoveEstadoCommand _removeEstadoCommand;
-    private readonly RemoveCidadeCommand _removeCidadeCommand;
-    private readonly CreateBairroCommand _createBairroCommand;
-    private readonly CreateLogradouroCommand _createLogradouroCommand;
-    private readonly UpdateBairroCommand _updateBairroCommand;
-    private readonly UpdateLogradouroCommand _updateLogradouroCommand;
-    private readonly RemoveBairroCommand _removeBairroCommand;
-    private readonly RemoveLogradouroCommand _removeLogradouroCommand;
-    private readonly CreateNumeroEnderecoCommand _createNumeroEnderecoCommand;
-    private readonly UpdateNumeroEnderecoCommand _updateNumeroEnderecoCommand;
-    private readonly RemoveNumeroEnderecoCommand _removeNumeroEnderecoCommand;
     
-    
-
-
 
     public EnderecoHandler(
         IEnderecoRepository enderecoRepository,
@@ -66,27 +35,8 @@ public class EnderecoHandler :
         IBairroRepository bairroRepository,
         ICidadeRepository cidadeRepository,
         IEstadoRepository estadoRepository,
-        IPaisRepository paisRepository,
-        
-        CreatePaisCommand createPaisCommand,
-        UpdatePaisCommand updatePaisCommand,
-        RemovePaisCommand removePaisCommand,
-        CreateEstadoCommand createEstadoCommand,
-        CreateCidadeCommand createCidadeCommand,
-        UpdateEstadoCommand updateEstadoCommand,
-        UpdateCidadeCommand updateCidadeCommand,
-        RemoveEstadoCommand removeEstadoCommand,
-        RemoveCidadeCommand removeCidadeCommand,
-        CreateBairroCommand createBairroCommand,
-        CreateLogradouroCommand createLogradouroCommand,
-        UpdateBairroCommand updateBairroCommand,
-        UpdateLogradouroCommand updateLogradouroCommand,
-        RemoveBairroCommand removeBairroCommand,
-        RemoveLogradouroCommand removeLogradouroCommand,
-        CreateNumeroEnderecoCommand createNumeroEnderecoCommand,
-        UpdateNumeroEnderecoCommand updateNumeroEnderecoCommand,
-        RemoveNumeroEnderecoCommand removeNumeroEnderecoCommand
-        )
+        IPaisRepository paisRepository
+    )
     {
         _enderecoRepository = enderecoRepository;
         _logradouroRepository = logradouroRepository;
@@ -98,41 +48,9 @@ public class EnderecoHandler :
         _cidadeEstadoRepository = cidadeEstadoRepository;
         _paisRepository = paisRepository;
         _eTipoResidencia = eTipoResidencia;
-        _createPaisCommand = createPaisCommand;
-        _updatePaisCommand = updatePaisCommand;
-        _removePaisCommand = removePaisCommand;
-        _createEstadoCommand = createEstadoCommand;
-        _createCidadeCommand = createCidadeCommand;
-        _updateEstadoCommand = updateEstadoCommand;
-        _updateCidadeCommand = updateCidadeCommand;
-        _removeEstadoCommand = removeEstadoCommand;
-        _removeCidadeCommand = removeCidadeCommand;
-        _createBairroCommand = createBairroCommand;
-        _updateBairroCommand = updateBairroCommand;
-        _removeBairroCommand = removeBairroCommand;
-        _createLogradouroCommand = createLogradouroCommand;
-        _updateLogradouroCommand = updateLogradouroCommand;
-        _removeLogradouroCommand = removeLogradouroCommand;
-        _createNumeroEnderecoCommand = createNumeroEnderecoCommand;
-        _updateNumeroEnderecoCommand = updateNumeroEnderecoCommand;
-        _removeNumeroEnderecoCommand = removeNumeroEnderecoCommand;
     }
     public ICommandResult Handle(CreateEnderecoCommand command)
     {
-        var logradouroHandler = new LogradouroHandler(_logradouroRepository);
-        var numeroHandler = new NumeroEnderecoHandler(_numeroEnderecoRepository);
-        var bairroHandler = new BairroHandler(_bairroRepository);
-        var cidadeHandler = new CidadeHandler(_cidadeRepository);
-        var estadoHandler = new EstadoHandler(_estadoRepository);
-        var paisHandler = new PaisHandler(_paisRepository);
-
-        var logradouroCommandResult = logradouroHandler.Handle(_createLogradouroCommand);
-        numeroHandler.Handle(_createNumeroEnderecoCommand);
-        bairroHandler.Handle(_createBairroCommand);
-        cidadeHandler.Handle(_createCidadeCommand);
-        estadoHandler.Handle(_createEstadoCommand);
-        paisHandler.Handle(_createPaisCommand);
-        
         var logradouro = _logradouroRepository.GetById(command.Logradouro); 
         var numero = _numeroEnderecoRepository.GetById(command.Numero);
        var eTipoResidencia = _eTipoResidencia;
@@ -158,20 +76,6 @@ public class EnderecoHandler :
 
     public ICommandResult Handle(UpdateEnderecoCommand command)
     {
-        //  var logradouroHandler = new LogradouroHandler(_logradouroRepository);
-        // var numeroHandler = new NumeroEnderecoHandler(_numeroEnderecoRepository);
-        // var bairroHandler = new BairroHandler(_bairroRepository);
-        // var cidadeHandler = new CidadeHandler(_cidadeRepository);
-        // var estadoHandler = new EstadoHandler(_estadoRepository);
-        // var paisHandler = new PaisHandler(_paisRepository);
-        //
-        // logradouroHandler.Handle(_updateLogradouroCommand);
-        // numeroHandler.Handle(_updateNumeroEnderecoCommand);
-        // bairroHandler.Handle(_updateBairroCommand);
-        // cidadeHandler.Handle(_updateCidadeCommand);
-        // estadoHandler.Handle(_updateEstadoCommand);
-        // paisHandler.Handle(_updatePaisCommand);
-        
         var logradouro = _logradouroRepository.GetById(command.Logradouro);
         var numero = _numeroEnderecoRepository.GetById(command.Numero);
         var eTipoResidencia = _eTipoResidencia;
@@ -197,20 +101,6 @@ public class EnderecoHandler :
 
     public ICommandResult Handle(RemoveEnderecoCommand command)
     {
-        // var logradouroHandler = new LogradouroHandler(_logradouroRepository);
-        // var numeroHandler = new NumeroEnderecoHandler(_numeroEnderecoRepository);
-        // var bairroHandler = new BairroHandler(_bairroRepository);
-        // var cidadeHandler = new CidadeHandler(_cidadeRepository);
-        // var estadoHandler = new EstadoHandler(_estadoRepository);
-        // var paisHandler = new PaisHandler(_paisRepository);
-        //
-        // logradouroHandler.Handle(_removeLogradouroCommand);
-        // numeroHandler.Handle(_removeNumeroEnderecoCommand);
-        // bairroHandler.Handle(_removeBairroCommand);
-        // cidadeHandler.Handle(_removeCidadeCommand);
-        // estadoHandler.Handle(_removeEstadoCommand);
-        // paisHandler.Handle(_removePaisCommand);
-        
         var logradouro = _logradouroRepository.GetById(command.Logradouro);
         var numero = _numeroEnderecoRepository.GetById(command.Numero);
         var eTipoResidencia = _eTipoResidencia;
