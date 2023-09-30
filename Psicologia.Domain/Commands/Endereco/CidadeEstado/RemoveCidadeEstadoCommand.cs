@@ -1,5 +1,5 @@
 namespace Psicologia.Domain.Commands.Endereco.CidadeEstado;
-
+using Psicologia.Domain.Entities.Endereco;
 public class RemoveCidadeEstadoCommand
 {
     public RemoveCidadeEstadoCommand()
@@ -9,8 +9,8 @@ public class RemoveCidadeEstadoCommand
 
     public RemoveCidadeEstadoCommand(
         Guid idCidadeEstado,
-        Entities.Endereco.Cidade cidade,
-        Entities.Endereco.Estado estado)
+        Cidade cidade,
+        Estado estado)
     {
         IdCidadeEstado = idCidadeEstado;
         IdCidade = cidade.Id;

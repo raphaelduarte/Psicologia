@@ -1,34 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+<<<<<<< HEAD
+using Psicologia.Domain.Entities.Endereco;
+=======
 using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Endereco;
+using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Handlers.Endereco;
+>>>>>>> 2a61a32 (Criação dos controllers de Endereco e Logradouro)
 using Psicologia.Domain.Repositories.Endereco;
 
 namespace Psicologia.API.Controllers.Endereco;
 
-[Route("v1/api/[controller]")]
+
+[Route("v1/app/[controller]")]
 [ApiController]
-public class EnderecoController : ControllerBase
+public class LogradouroController
 {
+<<<<<<< HEAD
     [Route("")]
+=======
+    [Route("get")]
+>>>>>>> 2a61a32 (Criação dos controllers de Endereco e Logradouro)
     [HttpGet]
-    public IEnumerable<Domain.Entities.Endereco.Endereco> GetAll(
-        [FromServices] IEnderecoRepository repository
-    )
+
+    public IEnumerable<Logradouro> GetAll(
+        [FromServices] ILogradouroRepository repository
+        )
     {
         return repository.GetAll();
     }
-
+<<<<<<< HEAD
+=======
+    
     [Route("{id:Guid}")]
     [HttpGet]
-    public Domain.Entities.Endereco.Endereco GetById(
+    public Logradouro GetById(
         [FromRoute] Guid id,
-        [FromServices] IEnderecoRepository repository)
+        [FromServices] ILogradouroRepository repository)
     {
         return repository.GetById(id);
     }
-
+    
     [Route("")]
     [HttpPost]
     public GenericCommandResult Create(
@@ -55,5 +67,5 @@ public class EnderecoController : ControllerBase
     {
         return (GenericCommandResult) handler.Handle(command);
     }
-
+>>>>>>> 2a61a32 (Criação dos controllers de Endereco e Logradouro)
 }

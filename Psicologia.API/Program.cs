@@ -2,6 +2,8 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Psicologia.Domain.Commands.Contracts;
 using Psicologia.Domain.Commands.Endereco.Bairro;
+using Psicologia.Domain.Commands.Endereco.BairroCidade;
+using Psicologia.Domain.Handlers.Contracts;
 using Psicologia.Domain.Handlers.Endereco;
 using Psicologia.Domain.Repositories.Endereco;
 using Psicologia.Domain.Validator.Endereco.Cidade;
@@ -15,10 +17,10 @@ using Psicologia.Infrastructure.Repositories.Endereco;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DataContext>(opt => 
-    opt.UseSqlServer("Data Source=desktop-i4tk8nf\\sqlexpress;Initial Catalog=HahnDb;Integrated Security=True;Trusted_Connection=True;Encrypt=False"));
+builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
+// builder.Services.AddDbContext<DataContext>(opt => 
+//     opt.UseSqlServer("Data Source=desktop-i4tk8nf\\sqlexpress;Initial Catalog=HahnDb;Integrated Security=True;Trusted_Connection=True;Encrypt=False"));
 
-builder.Services.AddControllers();
 builder.Services.AddControllers()
     .AddFluentValidation(config =>
     {
@@ -68,7 +70,6 @@ builder.Services.AddTransient<IPaisRepository, PaisRepository>();
 builder.Services.AddTransient<PaisHandler, PaisHandler>();
 
 builder.Services.AddTransient<IEnderecoRepository, EnderecoRepository>();
-builder.Services.AddTransient<EnderecoHandler, EnderecoHandler>();
 
 
 
@@ -93,14 +94,8 @@ app.UseRouting();
 
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-app.UseAuthentication();
-
 app.UseAuthorization();
 
-app.UseRouting();
-
 app.UseEndpoints(endpoints => endpoints.MapControllers());
-
-app.MapControllers();
 
 app.Run();

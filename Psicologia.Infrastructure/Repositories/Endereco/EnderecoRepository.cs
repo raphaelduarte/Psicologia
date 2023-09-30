@@ -3,6 +3,7 @@ using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Queries.Endereco;
 using Psicologia.Domain.Repositories.Endereco;
 using Psicologia.Infrastructure.Contexts;
+using Psicologia.Domain.Entities.Endereco;
 
 namespace Psicologia.Infrastructure.Repositories.Endereco;
 
