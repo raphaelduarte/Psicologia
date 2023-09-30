@@ -1,5 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Psicologia.Domain.Commands.Contracts;
+using Psicologia.Domain.Commands.Endereco.Bairro;
 using Psicologia.Domain.Handlers.Endereco;
 using Psicologia.Domain.Repositories.Endereco;
 using Psicologia.Domain.Validator.Endereco.Cidade;
@@ -19,58 +21,27 @@ builder.Services.AddDbContext<DataContext>(opt =>
 builder.Services.AddControllers();
 builder.Services.AddControllers()
     .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateLogradouroValidator>())
+    {
+        config.RegisterValidatorsFromAssemblyContaining<CreateLogradouroValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<UpdateLogradouroValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<RemoveLogradouroValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<RemoveNumeroEnderecoValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<UpdateNumeroEnderecoValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<CreateNumeroEnderecoValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<RemoveBairroValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<UpdateBairroValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<CreateBairroValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<RemoveCidadeValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<UpdateCidadeValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<CreateCidadeValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<RemoveEstadoValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<UpdateEstadoValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<CreateEstadoValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<RemovePaisValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<UpdatePaisValidator>();
+        config.RegisterValidatorsFromAssemblyContaining<CreatePaisValidator>();
+    });
 
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<UpdateLogradouroValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<RemoveLogradouroValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<RemoveNumeroEnderecoValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<UpdateNumeroEnderecoValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateNumeroEnderecoValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<RemoveBairroValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<UpdateBairroValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateBairroValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<RemoveCidadeValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<UpdateCidadeValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateCidadeValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<RemoveEstadoValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<UpdateEstadoValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreateEstadoValidator>())
-
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<RemovePaisValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<UpdatePaisValidator>())
-    
-    .AddFluentValidation(config =>
-        config.RegisterValidatorsFromAssemblyContaining<CreatePaisValidator>());
 
 builder.Services.AddTransient<ILogradouroRepository, LogradouroRepository>();
 builder.Services.AddTransient<LogradouroHandler, LogradouroHandler>();
@@ -100,6 +71,8 @@ builder.Services.AddTransient<IEnderecoRepository, EnderecoRepository>();
 builder.Services.AddTransient<EnderecoHandler, EnderecoHandler>();
 
 
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -123,6 +96,8 @@ app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseRouting();
 
 app.UseEndpoints(endpoints => endpoints.MapControllers());
 
