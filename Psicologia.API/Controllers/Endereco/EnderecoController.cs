@@ -7,7 +7,7 @@ using Psicologia.Domain.Repositories.Endereco;
 
 namespace Psicologia.API.Controllers.Endereco;
 
-[Route("v1/api[controller]")]
+[Route("v1/api/[controller]")]
 [ApiController]
 public class EnderecoController : ControllerBase
 {
