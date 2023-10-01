@@ -12,11 +12,15 @@ namespace Psicologia.Domain.Entities.Endereco
             Cidade cidade,
             Estado estado)
         {
+            IdCidade = Cidade.Id;
             Cidade = cidade;
+            IdEstado = Estado.Id;
             Estado = estado;
         }
 
+        public Guid IdCidade { get; private set; }
         public Cidade Cidade { get; private set; }
+        public Guid IdEstado { get; private set; }
         public Estado Estado { get; private set; }
     }
 }
