@@ -35,24 +35,36 @@ namespace Psicologia.Infrastructure.Contexts
             
             modelBuilder.Entity<Cidade>().HasKey(x => x.Id);
             modelBuilder.Entity<Cidade>().Property(x => x.CidadeName).HasMaxLength(50).HasColumnType("varchar(50)");
-            
-            modelBuilder.Entity<BairroCidade>().HasKey(x => x.Id);
-            modelBuilder.Entity<BairroCidade>().Property(x => x.Bairro.Id);
-            modelBuilder.Entity<BairroCidade>().Property(x => x.Cidade.Id);
+
+            modelBuilder.Entity<BairroCidade>()
+                .HasOne(bc => bc.Bairro)
+                .WithMany(b => b.BairroCidades)
+                .HasForeignKey(bc => bc.Id);
+
+            modelBuilder.Entity<BairroCidade>()
+                .HasOne(bc => bc.Cidade)
+                .WithMany(c => c.BairroCidades)
+                .HasForeignKey(bc => bc.IdCidade);
             
             
             modelBuilder.Entity<Estado>().HasKey(x => x.Id);
             modelBuilder.Entity<Estado>().Property(x => x.EstadoName).HasMaxLength(50).HasColumnType("varchar(50)");
             
-            modelBuilder.Entity<CidadeEstado>().HasKey(x => x.Id);
-            modelBuilder.Entity<CidadeEstado>().Property(x => x.Cidade.Id);
-            modelBuilder.Entity<CidadeEstado>().Property(x => x.Estado.Id);
+            modelBuilder.Entity<CidadeEstado>()
+                .HasOne(ce => ce.Cidade)
+                .WithMany(c => c.CidadeEstados)
+                .HasForeignKey(ce => ce.Id);
+            
+            modelBuilder.Entity<CidadeEstado>()
+                .HasOne(ce => ce.Estado)
+                .WithMany(c => c.CidadeEstados)
+                .HasForeignKey(ce => ce.Id);
             
             modelBuilder.Entity<Pais>().Property(x => x.Id);
             modelBuilder.Entity<Pais>().Property(x => x.PaisName).HasMaxLength(50).HasColumnType("varchar(50)");
             
             
-            modelBuilder.Entity<Endereco>().Property(x => x.Id);
+            modelBuilder.Entity<Endereco>().HasKey(x => x.Id);
             modelBuilder.Entity<Endereco>().Property(x => x.Logradouro.Id);
             modelBuilder.Entity<Endereco>().Property(x => x.Numero.Id);
             modelBuilder.Entity<Endereco>().Property(x => x.ETipoResidencia);

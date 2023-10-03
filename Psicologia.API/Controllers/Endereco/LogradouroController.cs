@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
+
 using Psicologia.Domain.Entities.Endereco;
-=======
+
 using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Endereco;
+using Psicologia.Domain.Commands.Endereco.Logradouro;
 using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Handlers.Endereco;
->>>>>>> 2a61a32 (Criação dos controllers de Endereco e Logradouro)
+
 using Psicologia.Domain.Repositories.Endereco;
 
 namespace Psicologia.API.Controllers.Endereco;
@@ -16,21 +17,16 @@ namespace Psicologia.API.Controllers.Endereco;
 [ApiController]
 public class LogradouroController
 {
-<<<<<<< HEAD
-    [Route("")]
-=======
-    [Route("get")]
->>>>>>> 2a61a32 (Criação dos controllers de Endereco e Logradouro)
-    [HttpGet]
 
+    [Route("")]
+    [HttpGet]
     public IEnumerable<Logradouro> GetAll(
         [FromServices] ILogradouroRepository repository
         )
     {
         return repository.GetAll();
     }
-<<<<<<< HEAD
-=======
+
     
     [Route("{id:Guid}")]
     [HttpGet]
@@ -44,28 +40,29 @@ public class LogradouroController
     [Route("")]
     [HttpPost]
     public GenericCommandResult Create(
-        [FromBody] CreateEnderecoCommand command,
-        [FromServices] EnderecoHandler handler)
+        [FromBody] CreateLogradouroCommand command,
+        [FromServices] LogradouroHandler handler)
     {
         return (GenericCommandResult) handler.Handle(command);
     }
 
-    [Route("")]
+    [Route("{id:Guid}")]
     [HttpPut]
     public GenericCommandResult Update(
-        [FromBody] UpdateEnderecoCommand command,
-        [FromServices] EnderecoHandler handler)
+        [FromRoute] Guid id,
+        [FromBody] UpdateLogradouroCommand command,
+        [FromServices] LogradouroHandler handler)
     {
         return (GenericCommandResult) handler.Handle(command);
     }
 
-    [Route("")]
+    [Route("{id:Guid}")]
     [HttpDelete]
     public GenericCommandResult Remove(
-        [FromBody] RemoveEnderecoCommand command,
-        [FromServices] EnderecoHandler handler)
+        [FromRoute] Guid id,
+        [FromBody] RemoveLogradouroCommand command,
+        [FromServices] LogradouroHandler handler)
     {
         return (GenericCommandResult) handler.Handle(command);
     }
->>>>>>> 2a61a32 (Criação dos controllers de Endereco e Logradouro)
 }
