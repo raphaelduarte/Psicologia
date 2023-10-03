@@ -1,6 +1,8 @@
 ﻿using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Contracts;
 using Psicologia.Domain.Commands.Endereco;
+using Psicologia.Domain.Commands.Endereco.Bairro;
+using Psicologia.Domain.Commands.Endereco.Logradouro;
 using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Handlers.Contracts;
 using Psicologia.Domain.Repositories.Endereco;
@@ -51,14 +53,27 @@ public class EnderecoHandler :
     }
     public ICommandResult Handle(CreateEnderecoCommand command)
     {
-        var logradouro = _logradouroRepository.GetById(command.Logradouro); 
-        var numero = _numeroEnderecoRepository.GetById(command.Numero);
-       var eTipoResidencia = _eTipoResidencia;
-       var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade);
-       var cidadeEstado = _cidadeEstadoRepository.GetById(command.CidadeEstado);
-       var pais = _paisRepository.GetById(command.Pais);
+        var logradouroHandler = new LogradouroHandler(_logradouroRepository);
+        var logradouroHandle = logradouroHandler.Handle(command.Logradouro);
+        var logradouro = new Logradouro(logradouroHandle.ToString());
+        
+        var numeroHandler = new NumeroEnderecoHandler(_numeroEnderecoRepository);
+        var numeroHandle = numeroHandler.Handle(command.Numero);
+        var numero = new NumeroEndereco(int.Parse(numeroHandle.ToString()));
+        
+        var paisHandler = new PaisHandler(_paisRepository);
+        var paisHandle = paisHandler.Handle(command.Pais);
+        var pais = new Pais(paisHandle.ToString());
 
-       var endereco = new Entities.Endereco.Endereco(
+        var bairroHandler = new BairroHandler(_bairroRepository);
+        var bairroHandle = bairroHandler.Handle(command.Bairro);
+        var bairro = _bairroRepository.GetAll();
+
+
+
+        var eTipoResidencia = _eTipoResidencia;
+
+        var endereco = new Entities.Endereco.Endereco(
            logradouro,
            numero,
            eTipoResidencia,

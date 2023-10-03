@@ -1,4 +1,12 @@
 ﻿using System.Drawing;
+using Psicologia.Domain.Commands.Endereco.Bairro;
+using Psicologia.Domain.Commands.Endereco.BairroCidade;
+using Psicologia.Domain.Commands.Endereco.Cidade;
+using Psicologia.Domain.Commands.Endereco.CidadeEstado;
+using Psicologia.Domain.Commands.Endereco.Estado;
+using Psicologia.Domain.Commands.Endereco.Logradouro;
+using Psicologia.Domain.Commands.Endereco.NumeroEndereco;
+using Psicologia.Domain.Commands.Endereco.Pais;
 using Psicologia.Domain.Entities.Endereco;
 
 namespace Psicologia.Domain.Commands.Endereco;
@@ -11,25 +19,28 @@ public class CreateEnderecoCommand
     }
 
     public CreateEnderecoCommand(
-        Entities.Endereco.Logradouro logradouro,
-        Entities.Endereco.NumeroEndereco numero,
-        ETipoResidencia eTipoResidencia,
-        Entities.Endereco.BairroCidade bairroCidade,
-        Entities.Endereco.CidadeEstado cidadeEstado,
-        Entities.Endereco.Pais pais)
+        CreateNumeroEnderecoCommand numeroCommand,
+        CreateLogradouroCommand logradouroCommand,
+        CreateBairroCommand bairroCommand,
+        CreateCidadeCommand cidadeCommand,
+        CreateEstadoCommand estadoCommand,
+        CreatePaisCommand paisCommand,
+        ETipoResidencia eTipoResidencia)
     {
-        Logradouro = logradouro.Id;
-        Numero = numero.Id;
+        Logradouro = logradouroCommand;
+        Numero = numeroCommand;
+        Bairro = bairroCommand;
+        Cidade = cidadeCommand;
+        Estado = estadoCommand;
         ETipoResidencia = eTipoResidencia;
-        BairroCidade = bairroCidade.Id;
-        CidadeEstado = cidadeEstado.Id;
-        Pais = pais.Id;
+        Pais = paisCommand;
         
     }
-    public Guid Logradouro { get; private set; }
-    public Guid Numero { get; private set; }
-    public Guid BairroCidade { get; private set; }
-    public Guid CidadeEstado { get; private set; }
-    public Guid Pais { get; private set; }
+    public CreateLogradouroCommand Logradouro { get; private set; }
+    public CreateNumeroEnderecoCommand Numero { get; private set; }
+    public CreateBairroCommand Bairro { get; private set; }
+    public CreateCidadeCommand Cidade { get; private set; }
+    public CreateEstadoCommand Estado { get; private set; }
+    public CreatePaisCommand Pais { get; private set; }
     public ETipoResidencia ETipoResidencia { get; private set; }
 }
