@@ -33,10 +33,9 @@ public class BairroCidadeHandler :
     
     public ICommandResult Handle(
         CreateBairroCidadeCommand command)
-    {
-
+    { 
         var bairro = _bairroRepository.GetById(command.Bairro.Id);
-       var cidade = _cidadeRepository.GetById(command.Cidade.Id);
+        var cidade = _cidadeRepository.GetById(command.Cidade.Id);
        
         var bairroCidade = new BairroCidade(
             bairro,

@@ -38,7 +38,7 @@ namespace Psicologia.Domain.Handlers.Endereco
             var logradouro = _logradouroRepository.GetById(command.Id);
             _logradouroRepository.Remove(logradouro);
 
-            return new GenericCommandResult(true, "Product saved", logradouro);
+            return new GenericCommandResult(true, "Product removed", logradouro);
         }
         
         public ICommandResult Handle(CreateLogradouroCommand command)

@@ -25,7 +25,8 @@ public class CreateEnderecoCommand
         CreateCidadeCommand cidadeCommand,
         CreateEstadoCommand estadoCommand,
         CreatePaisCommand paisCommand,
-        ETipoResidencia eTipoResidencia)
+        ETipoResidencia eTipoResidencia,
+        CreateBairroCidadeCommand bairroCidadeCommand)
     {
         Logradouro = logradouroCommand;
         Numero = numeroCommand;
@@ -34,7 +35,8 @@ public class CreateEnderecoCommand
         Estado = estadoCommand;
         ETipoResidencia = eTipoResidencia;
         Pais = paisCommand;
-        
+        BairroCidade = bairroCidadeCommand;
+
     }
     public CreateLogradouroCommand Logradouro { get; private set; }
     public CreateNumeroEnderecoCommand Numero { get; private set; }
@@ -43,4 +45,5 @@ public class CreateEnderecoCommand
     public CreateEstadoCommand Estado { get; private set; }
     public CreatePaisCommand Pais { get; private set; }
     public ETipoResidencia ETipoResidencia { get; private set; }
+    public CreateBairroCidadeCommand BairroCidade { get; private set; }
 }
