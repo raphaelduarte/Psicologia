@@ -1,4 +1,6 @@
-﻿using Psicologia.Domain.Commands;
+﻿using System.Linq.Expressions;
+using System.Security.AccessControl;
+using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Contracts;
 using Psicologia.Domain.Commands.Endereco;
 using Psicologia.Domain.Commands.Endereco.Bairro;
@@ -65,9 +67,29 @@ public class EnderecoHandler :
         var paisHandle = paisHandler.Handle(command.Pais);
         var pais = new Pais(paisHandle.ToString());
 
+        try
+        {
+            Expression<Func<Bairro, bool>> GetBairro(CreateEnderecoCommand command)
+            {
+                return x => x.BairroName == command.Bairro.BairroName;
+            }
+        }
+        catch
+        {
+            var bairroCommandResult = new GenericCommandResult(false,
+                "Bairro not found",
+                command.Bairro.BairroName);
+
+            bairroCommandResult.Message.ToString();
+        }
+        
+        
+        
         var bairroHandler = new BairroHandler(_bairroRepository);
         var bairroHandle = bairroHandler.Handle(command.Bairro);
         var bairro = new Bairro(bairroHandle.ToString());
+        
+        
 
         var cidadeHandler = new CidadeHandler(_cidadeRepository);
         var cidadeHandle = cidadeHandler.Handle(command.Cidade);
