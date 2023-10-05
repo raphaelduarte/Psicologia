@@ -34,8 +34,8 @@ public class CidadeEstadoHandler :
         var estado = _estadoRepository.GetById(command.IdEstado);
         
         var cidadeEstado = new CidadeEstado(
-            cidade,
-            estado);
+            cidade.Id,
+            estado.Id);
         
         _cidadeEstadoRepository.Create(cidadeEstado);
         

@@ -24,7 +24,7 @@ public class CidadeHandler :
         var validator = new CreateCidadeValidator();
         var validation = validator.Validate(command);
         
-        if (validation.IsValid == false)
+        if (!validation.IsValid)
         {
             return new GenericCommandResult(false, "Ops, it is not valid", command);
         }
@@ -39,7 +39,7 @@ public class CidadeHandler :
         var validator = new RemoveCidadeValidator();
         var validation = validator.Validate(command);
         
-        if (validation.IsValid == false)
+        if (!validation.IsValid)
         {
             return new GenericCommandResult(false, "Ops, it is not valid", command);
         }
@@ -56,7 +56,7 @@ public class CidadeHandler :
         var validator = new UpdateCidadeValidator();
         var validation = validator.Validate(command);
         
-        if (validation.IsValid == false)
+        if (!validation.IsValid)
         {
             return new GenericCommandResult(false, "Ops, it is not valid", command);
         }

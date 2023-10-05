@@ -67,16 +67,23 @@ public class EnderecoHandler :
 
         var bairroHandler = new BairroHandler(_bairroRepository);
         var bairroHandle = bairroHandler.Handle(command.Bairro);
-        var bairro = _bairroRepository.GetAll();
+        var bairro = new Bairro(bairroHandle.ToString());
 
-        var bairroCidadeHandler = new BairroCidadeHandler(
-            _bairroCidadeRepository,
-            _bairroRepository,
-            _cidadeRepository);
+        var cidadeHandler = new CidadeHandler(_cidadeRepository);
+        var cidadeHandle = cidadeHandler.Handle(command.Cidade);
+        var cidade = new Cidade(cidadeHandle.ToString());
 
-        var bairroCidadeHandle = bairroCidadeHandler.Handle(command.BairroCidade);
-        var bairroCidade = new BairroCidade(bairroCidadeHandle.ToString());
+        var estadoHandler = new EstadoHandler(_estadoRepository);
+        var estadoHandle = estadoHandler.Handle(command.Estado);
+        var estado = new Estado(estadoHandle.ToString());
+        
+        var bairroCidade = new BairroCidade(
+            bairro.Id,
+            cidade.Id);
 
+        var cidadeEstado = new CidadeEstado(
+            cidade.Id,
+            estado.Id);
 
 
         var eTipoResidencia = _eTipoResidencia;
@@ -93,8 +100,8 @@ public class EnderecoHandler :
        
        return new GenericCommandResult(
            true,
-           "Endereco saved",
-            );
+           "Endereco saved", endereco
+           );
     }
 
     public ICommandResult Handle(UpdateEnderecoCommand command)

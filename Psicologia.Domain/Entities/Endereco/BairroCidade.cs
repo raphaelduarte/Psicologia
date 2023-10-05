@@ -9,18 +9,14 @@ namespace Psicologia.Domain.Entities.Endereco
     public class BairroCidade : Entity
     {
         public BairroCidade(
-            Bairro bairro,
-            Cidade cidade)
+            Guid idBairro,
+            Guid idCidade)
         {
-            IdBairro = Bairro.Id;
-            Bairro = bairro;
-            IdCidade = Cidade.Id;
-            Cidade = cidade;
+            IdBairro = idBairro;
+            IdCidade = idCidade;
         }
 
         public Guid IdBairro { get; private set; }
         public Guid IdCidade { get; private set; }
-        public Bairro Bairro { get; private set; }
-        public Cidade Cidade { get; private set; }
     }
 }
