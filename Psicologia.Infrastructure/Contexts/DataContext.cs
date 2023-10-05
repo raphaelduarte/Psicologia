@@ -36,29 +36,29 @@ namespace Psicologia.Infrastructure.Contexts
             modelBuilder.Entity<Cidade>().HasKey(x => x.Id);
             modelBuilder.Entity<Cidade>().Property(x => x.CidadeName).HasMaxLength(50).HasColumnType("varchar(50)");
 
-            modelBuilder.Entity<BairroCidade>()
-                .HasOne(bc => bc.Bairro)
-                .WithMany(b => b.BairroCidades)
-                .HasForeignKey(bc => bc.Id);
+            // modelBuilder.Entity<BairroCidade>()
+            //     .HasOne(bc => bc)
+            //     .WithMany(b => b.Id)
+            //     .HasForeignKey(bc => bc.Id);
 
-            modelBuilder.Entity<BairroCidade>()
-                .HasOne(bc => bc.Cidade)
-                .WithMany(c => c.BairroCidades)
-                .HasForeignKey(bc => bc.IdCidade);
+            // modelBuilder.Entity<BairroCidade>()
+            //     .HasOne(bc => bc.Cidade)
+            //     .WithMany(c => c.BairroCidades)
+            //     .HasForeignKey(bc => bc.IdCidade);
             
             
             modelBuilder.Entity<Estado>().HasKey(x => x.Id);
             modelBuilder.Entity<Estado>().Property(x => x.EstadoName).HasMaxLength(50).HasColumnType("varchar(50)");
             
-            modelBuilder.Entity<CidadeEstado>()
-                .HasOne(ce => ce.Cidade)
-                .WithMany(c => c.CidadeEstados)
-                .HasForeignKey(ce => ce.Id);
+            // modelBuilder.Entity<CidadeEstado>()
+            //     .HasOne(ce => ce.Cidade)
+            //     .WithMany(c => c.CidadeEstados)
+            //     .HasForeignKey(ce => ce.Id);
             
-            modelBuilder.Entity<CidadeEstado>()
-                .HasOne(ce => ce.Estado)
-                .WithMany(c => c.CidadeEstados)
-                .HasForeignKey(ce => ce.Id);
+            // modelBuilder.Entity<CidadeEstado>()
+            //     .HasOne(ce => ce.Estado)
+            //     .WithMany(c => c.CidadeEstados)
+            //     .HasForeignKey(ce => ce.Id);
             
             modelBuilder.Entity<Pais>().Property(x => x.Id);
             modelBuilder.Entity<Pais>().Property(x => x.PaisName).HasMaxLength(50).HasColumnType("varchar(50)");

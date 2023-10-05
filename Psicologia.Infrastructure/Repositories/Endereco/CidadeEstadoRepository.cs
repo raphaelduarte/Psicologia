@@ -48,6 +48,6 @@ public class CidadeEstadoRepository : ICidadeEstadoRepository
         return _context.CidadesEstados
             .AsNoTracking()
             .Where(CidadeEstadoQueries.GetAll())
-            .OrderBy(x => x.Estado);
+            .OrderBy(x => x.Id);
     }
 }

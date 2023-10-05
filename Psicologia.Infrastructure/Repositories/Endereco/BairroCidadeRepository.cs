@@ -47,6 +47,6 @@ public class BairroCidadeRepository : IBairroCidadeRepository
         return _context.BairrosCidades
             .AsNoTracking()
             .Where(BairroCidadeQueries.GetAll())
-            .OrderBy(x => x.Cidade);
+            .OrderBy(x => x.Id);
     }
 }
