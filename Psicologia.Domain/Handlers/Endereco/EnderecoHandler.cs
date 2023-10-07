@@ -160,34 +160,34 @@ public class EnderecoHandler :
         var logradouroHandler = new LogradouroHandler(_logradouroRepository);
         var logradouroHandle = logradouroHandler.Handle(command.Logradouro);
         var logradouro = _logradouroRepository.GetById(command.Logradouro.Id);
-        
+        _logradouroRepository.Update(logradouro);
         
         var numeroHandler = new NumeroEnderecoHandler(_numeroEnderecoRepository);
         var numeroHandle = numeroHandler.Handle(command.Numero);
         var numero = _numeroEnderecoRepository.GetById(command.Numero.Id);
-        
+        _numeroEnderecoRepository.Update(numero);
         
         var paisHandler = new PaisHandler(_paisRepository);
         var paisHandle = paisHandler.Handle(command.Pais);
         var pais = _paisRepository.GetById(command.Pais.IdPais);
-        
+        _paisRepository.Update(pais);
         
         var eTipoResidencia = _eTipoResidencia;
         
         var bairroHandler = new BairroHandler(_bairroRepository);
         var bairroHandle = bairroHandler.Handle(command.Bairro);
         var bairro = _bairroRepository.GetById(command.Bairro.Id);
-        
+        _bairroRepository.Update(bairro);
         
         var cidadeHandler = new CidadeHandler(_cidadeRepository);
         var cidadeHandle = cidadeHandler.Handle(command.Cidade);
         var cidade = _cidadeRepository.GetById(command.Cidade.Id);
-        
+        _cidadeRepository.Update(cidade);
         
         var estadoHandler = new EstadoHandler(_estadoRepository);
         var estadoHandle = estadoHandler.Handle(command.Estado);
         var estado = _estadoRepository.GetById(command.Estado.IdEstado);
-        
+        _estadoRepository.Update(estado);
 
         var bairroCidadeHandler = new BairroCidadeHandler(
             _bairroCidadeRepository,
@@ -196,14 +196,17 @@ public class EnderecoHandler :
             );
         var bairroCidadeHandle = bairroCidadeHandler.Handle(command.BairroCidade);
         var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade.IdBairroCidade);
+        _bairroCidadeRepository.Update(bairroCidade);
 
         
         var cidadeEstadoHandler = new CidadeEstadoHandler(
             _cidadeEstadoRepository,
             _cidadeRepository,
-            _estadoRepository);
+            _estadoRepository)
+            ;
         var cidadeEstadoHandle = cidadeEstadoHandler.Handle(command.CidadeEstado);
         var cidadeEstado = _cidadeEstadoRepository.GetById(command.CidadeEstado.IdCidadeEstado);
+        _cidadeEstadoRepository.Update(cidadeEstado);
         
 
         var endereco = _enderecoRepository.GetById(command.IdEndereco);
