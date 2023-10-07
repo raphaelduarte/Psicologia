@@ -1,4 +1,9 @@
-﻿using Psicologia.Domain.Entities.Endereco;
+﻿using Psicologia.Domain.Commands.Endereco.BairroCidade;
+using Psicologia.Domain.Commands.Endereco.CidadeEstado;
+using Psicologia.Domain.Commands.Endereco.Logradouro;
+using Psicologia.Domain.Commands.Endereco.NumeroEndereco;
+using Psicologia.Domain.Commands.Endereco.Pais;
+using Psicologia.Domain.Entities.Endereco;
 
 namespace Psicologia.Domain.Commands.Endereco;
 
@@ -11,28 +16,28 @@ public class RemoveEnderecoCommand
 
     public RemoveEnderecoCommand(
         Guid idEndereco,
-        Entities.Endereco.Logradouro logradouro,
-        Entities.Endereco.NumeroEndereco numero,
+        RemoveLogradouroCommand logradouro,
+        RemoveNumeroEnderecoCommand numero,
         ETipoResidencia eTipoResidencia,
-        Entities.Endereco.BairroCidade bairroCidade,
-        Entities.Endereco.CidadeEstado cidadeEstado,
-        Entities.Endereco.Pais pais)
+        RemoveBairroCidadeCommand bairroCidade,
+        RemoveCidadeEstadoCommand cidadeEstado,
+        RemovePaisCommand pais)
     {
         IdEndereco = idEndereco;
-        Logradouro = logradouro.Id;
-        Numero = numero.Id;
+        Logradouro = logradouro;
+        Numero = numero;
         ETipoResidencia = eTipoResidencia;
-        BairroCidade = bairroCidade.Id;
-        CidadeEstado = cidadeEstado.Id;
-        Pais = pais.Id;
+        BairroCidade = bairroCidade;
+        CidadeEstado = cidadeEstado;
+        Pais = pais;
         
     }
 
     public Guid IdEndereco { get; private set; }
-    public Guid Logradouro { get; private set; }
-    public Guid Numero { get; private set; }
-    public Guid BairroCidade { get; private set; }
-    public Guid CidadeEstado { get; private set; }
-    public Guid Pais { get; private set; }
+    public RemoveLogradouroCommand Logradouro { get; private set; }
+    public RemoveNumeroEnderecoCommand Numero { get; private set; }
+    public RemoveBairroCidadeCommand BairroCidade { get; private set; }
+    public RemoveCidadeEstadoCommand CidadeEstado { get; private set; }
+    public RemovePaisCommand Pais { get; private set; }
     public ETipoResidencia ETipoResidencia { get; private set; }
 }

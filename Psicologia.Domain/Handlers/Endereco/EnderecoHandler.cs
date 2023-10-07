@@ -220,21 +220,25 @@ public class EnderecoHandler :
 
     public ICommandResult Handle(RemoveEnderecoCommand command)
     {
-        var logradouro = _logradouroRepository.GetById(command.Logradouro);
-        var numero = _numeroEnderecoRepository.GetById(command.Numero);
+        var logradouro = _logradouroRepository.GetById(command.Logradouro.Id);
+        _logradouroRepository.Remove(logradouro);
+        
+        var numero = _numeroEnderecoRepository.GetById(command.Numero.Id);
+        _numeroEnderecoRepository.Remove(numero);
+        
         var eTipoResidencia = _eTipoResidencia;
-        var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade);
-        var cidadeEstado = _cidadeEstadoRepository.GetById(command.CidadeEstado);
-        var pais = _paisRepository.GetById(command.Pais);
         
-        var endereco = new Entities.Endereco.Endereco(
-            logradouro,
-            numero,
-            eTipoResidencia,
-            bairroCidade,
-            cidadeEstado,
-            pais);
+        var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade.IdBairroCidade);
+        _bairroCidadeRepository.Remove(bairroCidade);
         
+        var cidadeEstado = _cidadeEstadoRepository.GetById(command.CidadeEstado.IdCidadeEstado);
+        _cidadeEstadoRepository.Remove(cidadeEstado);
+        
+        var pais = _paisRepository.GetById(command.Pais.IdPais);
+        _paisRepository.Remove(pais);
+
+        var endereco = _enderecoRepository.GetById(command.IdEndereco);
+
         _enderecoRepository.Remove(endereco);
         
         return new GenericCommandResult(
