@@ -27,7 +27,6 @@ public class EnderecoHandler :
     private readonly IBairroCidadeRepository _bairroCidadeRepository;
     private readonly ICidadeEstadoRepository _cidadeEstadoRepository;
     private readonly IPaisRepository _paisRepository;
-    private readonly ETipoResidencia _eTipoResidencia;
     private readonly IBairroRepository _bairroRepository;
     private readonly ICidadeRepository _cidadeRepository;
     private readonly IEstadoRepository _estadoRepository;
@@ -37,7 +36,6 @@ public class EnderecoHandler :
         IEnderecoRepository enderecoRepository,
         ILogradouroRepository logradouroRepository,
         INumeroEnderecoRepository numeroEnderecoRepository,
-        ETipoResidencia eTipoResidencia,
         IBairroCidadeRepository bairroCidadeRepository,
         ICidadeEstadoRepository cidadeEstadoRepository,
         IBairroRepository bairroRepository,
@@ -55,7 +53,6 @@ public class EnderecoHandler :
         _bairroCidadeRepository = bairroCidadeRepository;
         _cidadeEstadoRepository = cidadeEstadoRepository;
         _paisRepository = paisRepository;
-        _eTipoResidencia = eTipoResidencia;
     }
     public ICommandResult Handle(CreateEnderecoCommand command)
     {
@@ -137,7 +134,7 @@ public class EnderecoHandler :
             _estado.Id);
 
 
-        var eTipoResidencia = _eTipoResidencia;
+        var eTipoResidencia = command.ETipoResidencia;
 
         var endereco = new Entities.Endereco.Endereco(
            logradouro,
@@ -174,8 +171,8 @@ public class EnderecoHandler :
         var pais = _paisRepository.GetById(command.Pais.IdPais);
         _paisRepository.UpdatePaisName(paisHandle.ToString());
         _paisRepository.Update(pais);
-        
-        var eTipoResidencia = _eTipoResidencia;
+
+        var eTipoResidencia = command.ETipoResidencia;
         
         var bairroHandler = new BairroHandler(_bairroRepository);
         var bairroHandle = bairroHandler.Handle(command.Bairro);
@@ -232,7 +229,7 @@ public class EnderecoHandler :
         var numero = _numeroEnderecoRepository.GetById(command.Numero.Id);
         _numeroEnderecoRepository.Remove(numero);
         
-        var eTipoResidencia = _eTipoResidencia;
+        var eTipoResidencia = command.ETipoResidencia;
         
         var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade.IdBairroCidade);
         _bairroCidadeRepository.Remove(bairroCidade);

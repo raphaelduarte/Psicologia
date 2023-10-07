@@ -36,7 +36,7 @@ public class LogradouroController
     {
         return repository.GetById(id);
     }
-    
+
     [Route("")]
     [HttpPost]
     public GenericCommandResult Create(
