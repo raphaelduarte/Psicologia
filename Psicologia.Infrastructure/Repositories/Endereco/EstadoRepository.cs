@@ -32,6 +32,12 @@ public class EstadoRepository : IEstadoRepository
         _context.SaveChanges();
     }
 
+    public void UpdateEstadoName(string estadoName)
+    {
+        _context.Entry(estadoName).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
     public Estado GetById(Guid id)
     {
         _context.Estados.FirstOrDefault(x => x.Id == id);

@@ -33,6 +33,12 @@ public class PaisRepository : IPaisRepository
         _context.SaveChanges();
     }
 
+    public void UpdatePaisName(string paisName)
+    {
+        _context.Entry(paisName).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
     public Pais GetById(Guid id)
     {
         _context.Paises.FirstOrDefault(x => x.Id == id);

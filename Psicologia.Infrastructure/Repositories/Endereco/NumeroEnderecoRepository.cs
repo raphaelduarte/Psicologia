@@ -33,6 +33,12 @@ public class NumeroEnderecoRepository : INumeroEnderecoRepository
         _context.SaveChanges();
     }
 
+    public void UpdateNumero(int numeroEndereco)
+    {
+        _context.Entry(numeroEndereco.ToString()).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
     public NumeroEndereco GetById(Guid id)
     {
         _context.NumeroEnderecos.FirstOrDefault(x => x.Id == id);

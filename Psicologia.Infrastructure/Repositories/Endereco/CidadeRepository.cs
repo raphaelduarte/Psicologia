@@ -32,6 +32,12 @@ public class CidadeRepository : ICidadeRepository
         _context.SaveChanges();
     }
 
+    public void UpdateCidadeName(string cidadeName)
+    {
+        _context.Entry(cidadeName).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
     public Cidade GetById(Guid id)
     {
         _context.Cidades.FirstOrDefault(x => x.Id == id);

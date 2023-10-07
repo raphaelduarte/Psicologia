@@ -32,6 +32,12 @@ public class BairroRepository : IBairroRepository
         _context.SaveChanges();
     }
 
+    public void UpdateBairroName(string bairroName)
+    {
+        _context.Entry(bairroName).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
     public Bairro GetById(Guid id)
     {
         _context.Bairros.FirstOrDefault(x => x.Id == id);

@@ -38,6 +38,12 @@ namespace Psicologia.Infrastructure.Repositories.Endereco
             _context.SaveChanges();
         }
 
+        public void UpdateLogradouroName(string logradouroName)
+        {
+            _context.Entry(logradouroName).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
         public Logradouro GetById(Guid id)
         {
             _context.Logradouros.FirstOrDefault(x => x.Id == id);

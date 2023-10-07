@@ -7,6 +7,7 @@ public interface ILogradouroRepository
     void Create(Logradouro logradouroName);
     void Update(Logradouro logradouroName);
     void Remove(Logradouro logradouroName);
+    void UpdateLogradouroName(string logradouroName);
     Logradouro GetById(Guid id);
     IEnumerable<Logradouro> GetAll();
 }
