@@ -8,5 +8,7 @@ public interface ICidadeRepository
     void Update(Cidade cidadeName);
     void Remove(Cidade cidadeName);
     Cidade GetById(Guid id);
+    Cidade GetByName(string cidadeName);
+    IEnumerable<Cidade> GetByNameLink(string cidadeName);
     IEnumerable<Cidade> GetAll();
 }

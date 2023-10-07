@@ -47,4 +47,18 @@ public class CidadeRepository : ICidadeRepository
             .Where(CidadeQueries.GetAll())
             .OrderBy(x => x.CidadeName);
     }
+    
+    public IEnumerable<Cidade> GetByNameLink(string cidade)
+    {
+        return _context.Cidades
+            .AsNoTracking()
+            .Where(CidadeQueries.Get(cidade))
+            .OrderBy(x => x.CidadeName);
+    }
+    
+    public Cidade GetByName(string cidade)
+    {
+        return _context.Cidades
+            .FirstOrDefault(x => x.CidadeName == cidade);
+    }
 }

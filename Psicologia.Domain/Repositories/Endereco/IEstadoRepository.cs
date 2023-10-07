@@ -8,5 +8,7 @@ public interface IEstadoRepository
     void Update(Estado estadoName);
     void Remove(Estado estadoName);
     Estado GetById(Guid id);
+    Estado GetByName(string estadoName);
+    IEnumerable<Estado> GetByNameLink(string estadoName);
     IEnumerable<Estado> GetAll();
 }

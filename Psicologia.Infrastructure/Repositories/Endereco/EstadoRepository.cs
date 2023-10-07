@@ -47,4 +47,18 @@ public class EstadoRepository : IEstadoRepository
             .Where(EstadoQueries.GetAll())
             .OrderBy(x => x.EstadoName);
     }
+    
+    public IEnumerable<Estado> GetByNameLink(string estado)
+    {
+        return _context.Estados
+            .AsNoTracking()
+            .Where(EstadoQueries.Get(estado))
+            .OrderBy(x => x.EstadoName);
+    }
+    
+    public Estado GetByName(string estado)
+    {
+        return _context.Estados
+            .FirstOrDefault(x => x.EstadoName == estado);
+    }
 }

@@ -19,6 +19,8 @@ public class EnderecoHandler :
     IHandler<RemoveEnderecoCommand>
 {
     private Bairro _bairro { get; set; }
+    private Cidade _cidade { get; set; }
+    private Estado _estado { get; set; }
     private readonly IEnderecoRepository _enderecoRepository;
     private readonly ILogradouroRepository _logradouroRepository;
     private readonly INumeroEnderecoRepository _numeroEnderecoRepository;
@@ -71,15 +73,15 @@ public class EnderecoHandler :
         
         
         
-        try  // Se existir um bairro com esse nome ele não vai criar um novo bairro
+        try
         {
             var bairroCommand = BairroQueries.Get(command.Bairro.BairroName)
-                .Name.ToString();
+                .ToString();
             _bairro = _bairroRepository.GetByName(bairroCommand);
 
 
         }
-        catch  // Se não existir um bairro com esse nome ele tem que criar um novo bairro
+        catch 
         {
             var bairroHandler = new BairroHandler(_bairroRepository);
             var bairroHandle = bairroHandler.Handle(command.Bairro);
@@ -87,32 +89,50 @@ public class EnderecoHandler :
             _bairro = bairro;
         }
 
-
-
-        var bairroCommandResult = new GenericCommandResult(false,
-                "Bairro not found",
-                command.Bairro.BairroName);
-
-            bairroCommandResult.Message.ToString();
+        try
+        {
+            var cidadeCommand = CidadeQueries
+                .Get(command.Cidade.CidadeName)
+                .ToString();
             
-        
-        
+            _cidade = _cidadeRepository
+                .GetByName(cidadeCommand);
+        }
+        catch 
+        {
+            var cidadeHandler = new CidadeHandler(_cidadeRepository);
+            var cidadeHandle = cidadeHandler.Handle(command.Cidade);
+            var cidade = new Cidade(cidadeHandle.ToString());
+            _cidade = cidade;
+        }
 
-        var cidadeHandler = new CidadeHandler(_cidadeRepository);
-        var cidadeHandle = cidadeHandler.Handle(command.Cidade);
-        var cidade = new Cidade(cidadeHandle.ToString());
+        try
+        {
+            var estadoCommand = EstadoQueries
+                .Get(command.Estado.EstadoName)
+                .ToString();
 
-        var estadoHandler = new EstadoHandler(_estadoRepository);
-        var estadoHandle = estadoHandler.Handle(command.Estado);
-        var estado = new Estado(estadoHandle.ToString());
+            _estado = _estadoRepository
+                .GetByName(estadoCommand);
+
+        }
+        catch 
+        {
+            var estadoHandler = new EstadoHandler(_estadoRepository);
+            var estadoHandle = estadoHandler.Handle(command.Estado);
+            var estado = new Estado(estadoHandle.ToString());
+            _estado = estado;
+        }
+
+        
         
         var bairroCidade = new BairroCidade(
             _bairro.Id,
-            cidade.Id);
+            _cidade.Id);
 
         var cidadeEstado = new CidadeEstado(
-            cidade.Id,
-            estado.Id);
+            _cidade.Id,
+            _estado.Id);
 
 
         var eTipoResidencia = _eTipoResidencia;

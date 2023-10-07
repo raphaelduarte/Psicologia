@@ -5,7 +5,7 @@ namespace Psicologia.Domain.Queries.Endereco;
 
 public static class EstadoQueries
 {
-    public static Expression<Func<Estado, bool>> GetAll(string estado)
+    public static Expression<Func<Estado, bool>> Get(string estado)
     {
         return x => x.EstadoName == estado;
     }
