@@ -75,8 +75,10 @@ public class EnderecoHandler :
         
         try
         {
-            var bairroCommand = BairroQueries.Get(command.Bairro.BairroName)
+            var bairroCommand = BairroQueries
+                .Get(command.Bairro.BairroName)
                 .ToString();
+            
             _bairro = _bairroRepository.GetByName(bairroCommand);
 
 
