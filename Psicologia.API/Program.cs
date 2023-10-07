@@ -44,7 +44,6 @@ builder.Services.AddControllers()
         config.RegisterValidatorsFromAssemblyContaining<CreatePaisValidator>();
     });
 
-
 builder.Services.AddTransient<ILogradouroRepository, LogradouroRepository>();
 builder.Services.AddTransient<LogradouroHandler, LogradouroHandler>();
 

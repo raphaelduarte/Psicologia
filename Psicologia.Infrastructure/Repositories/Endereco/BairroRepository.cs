@@ -47,4 +47,12 @@ public class BairroRepository : IBairroRepository
             .Where(BairroQueries.GetAll())
             .OrderBy(x => x.BairroName);
     }
+
+    public IEnumerable<Bairro> Get(string bairro)
+    {
+        return _context.Bairros
+            .AsNoTracking()
+            .Where(BairroQueries.Get(bairro))
+            .OrderBy(x => x.BairroName);
+    }
 }

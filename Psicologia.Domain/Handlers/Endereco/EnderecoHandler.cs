@@ -9,6 +9,7 @@ using Psicologia.Domain.Entities.Endereco;
 using Psicologia.Domain.Handlers.Contracts;
 using Psicologia.Domain.Repositories.Endereco;
 using Psicologia.Domain.Entities.Endereco;
+using Psicologia.Domain.Queries.Endereco;
 
 namespace Psicologia.Domain.Handlers.Endereco;
 
@@ -17,6 +18,7 @@ public class EnderecoHandler :
     IHandler<UpdateEnderecoCommand>,
     IHandler<RemoveEnderecoCommand>
 {
+    private Bairro _bairro { get; set; }
     private readonly IEnderecoRepository _enderecoRepository;
     private readonly ILogradouroRepository _logradouroRepository;
     private readonly INumeroEnderecoRepository _numeroEnderecoRepository;
@@ -66,28 +68,30 @@ public class EnderecoHandler :
         var paisHandler = new PaisHandler(_paisRepository);
         var paisHandle = paisHandler.Handle(command.Pais);
         var pais = new Pais(paisHandle.ToString());
-
-        try
+        
+        
+        
+        try  // Se existir um bairro com esse nome ele não vai criar um novo bairro
         {
-            Expression<Func<Bairro, bool>> GetBairro(CreateEnderecoCommand command)
-            {
-                return x => x.BairroName == command.Bairro.BairroName;
-            }
+            var bairroCommand = BairroQueries.Get(command.Bairro.BairroName)
+                .Name.ToString();
         }
-        catch
+        catch  // Se não existir um bairro com esse nome ele tem que criar um novo bairro
         {
-            var bairroCommandResult = new GenericCommandResult(false,
+            var bairroHandler = new BairroHandler(_bairroRepository);
+            var bairroHandle = bairroHandler.Handle(command.Bairro);
+            var bairro = new Bairro(bairroHandle.ToString());
+            _bairro = bairro;
+        }
+
+
+
+        var bairroCommandResult = new GenericCommandResult(false,
                 "Bairro not found",
                 command.Bairro.BairroName);
 
             bairroCommandResult.Message.ToString();
-        }
-        
-        
-        
-        var bairroHandler = new BairroHandler(_bairroRepository);
-        var bairroHandle = bairroHandler.Handle(command.Bairro);
-        var bairro = new Bairro(bairroHandle.ToString());
+            
         
         
 
@@ -100,7 +104,7 @@ public class EnderecoHandler :
         var estado = new Estado(estadoHandle.ToString());
         
         var bairroCidade = new BairroCidade(
-            bairro.Id,
+            _bairro.Id,
             cidade.Id);
 
         var cidadeEstado = new CidadeEstado(

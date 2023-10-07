@@ -20,14 +20,20 @@
   <ItemGroup>
     <Compile Remove="Validator\Endereco\BairroCidade\**" />
     <Compile Remove="Repositories\Endereco\EstadoRepository.cs" />
+    <Compile Remove="Services\**" />
+    <Compile Remove="Contexts\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Validator\Endereco\BairroCidade\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="Contexts\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Validator\Endereco\BairroCidade\**" />
+    <None Remove="Services\**" />
+    <None Remove="Contexts\**" />
   </ItemGroup>
 
 </Project>
