@@ -21,12 +21,13 @@ public class CidadeEstadoHandler :
 
     public CidadeEstadoHandler(
         ICidadeEstadoRepository cidadeEstadoRepository,
-        IEstadoRepository estadoRepository,
-        ICidadeRepository cidadeRepository)
+        ICidadeRepository cidadeRepository,
+        IEstadoRepository estadoRepository
+        )
     {
         _cidadeEstadoRepository = cidadeEstadoRepository;
-        _estadoRepository = estadoRepository;
         _cidadeRepository = cidadeRepository;
+        _estadoRepository = estadoRepository;
     }
     public ICommandResult Handle(CreateCidadeEstadoCommand command)
     {

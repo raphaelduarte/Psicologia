@@ -1,4 +1,12 @@
-﻿using Psicologia.Domain.Entities.Endereco;
+﻿using Psicologia.Domain.Commands.Endereco.Bairro;
+using Psicologia.Domain.Commands.Endereco.BairroCidade;
+using Psicologia.Domain.Commands.Endereco.Cidade;
+using Psicologia.Domain.Commands.Endereco.CidadeEstado;
+using Psicologia.Domain.Commands.Endereco.Estado;
+using Psicologia.Domain.Commands.Endereco.Logradouro;
+using Psicologia.Domain.Commands.Endereco.NumeroEndereco;
+using Psicologia.Domain.Commands.Endereco.Pais;
+using Psicologia.Domain.Entities.Endereco;
 
 namespace Psicologia.Domain.Commands.Endereco;
 
@@ -10,26 +18,38 @@ public class UpdateEnderecoCommand
     }
 
     public UpdateEnderecoCommand(
-        Entities.Endereco.Logradouro logradouro,
-        Entities.Endereco.NumeroEndereco numero,
+        Guid idEndereco,
+        UpdateLogradouroCommand logradouro,
+        UpdateNumeroEnderecoCommand numero,
         ETipoResidencia eTipoResidencia,
-        Entities.Endereco.BairroCidade bairroCidade,
-        Entities.Endereco.CidadeEstado cidadeEstado,
-        Entities.Endereco.Pais pais)
+        UpdateBairroCommand bairro,
+        UpdateCidadeCommand cidade,
+        UpdateEstadoCommand estado,
+    UpdateBairroCidadeCommand bairroCidade,
+        UpdateCidadeEstadoCommand cidadeEstado,
+        UpdatePaisCommand pais)
     {
-        Logradouro = logradouro.Id;
-        Numero = numero.Id;
+        IdEndereco = idEndereco;
+        Logradouro = logradouro;
+        Numero = numero;
+        Bairro = bairro;
+        Cidade = cidade;
+        Estado = estado;
         ETipoResidencia = eTipoResidencia;
-        BairroCidade = bairroCidade.Id;
-        CidadeEstado = cidadeEstado.Id;
-        Pais = pais.Id;
+        BairroCidade = bairroCidade;
+        CidadeEstado = cidadeEstado;
+        Pais = pais;
         
     }
 
-    public Guid Logradouro { get; private set; }
-    public Guid Numero { get; private set; }
-    public Guid BairroCidade { get; private set; }
-    public Guid CidadeEstado { get; private set; }
-    public Guid Pais { get; private set; }
+    public Guid IdEndereco { get; private set; }
+    public UpdateLogradouroCommand Logradouro { get; private set; }
+    public UpdateNumeroEnderecoCommand Numero { get; private set; }
+    public UpdateBairroCommand Bairro { get; private set; }
+    public UpdateCidadeCommand Cidade { get; private set; }
+    public UpdateEstadoCommand Estado { get; private set; }
+    public UpdateBairroCidadeCommand BairroCidade { get; private set; }
+    public UpdateCidadeEstadoCommand CidadeEstado { get; private set; }
+    public UpdatePaisCommand Pais { get; private set; }
     public ETipoResidencia ETipoResidencia { get; private set; }
 }
