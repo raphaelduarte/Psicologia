@@ -48,11 +48,17 @@ public class BairroRepository : IBairroRepository
             .OrderBy(x => x.BairroName);
     }
 
-    public IEnumerable<Bairro> Get(string bairro)
+    public IEnumerable<Bairro> GetByNameLink(string bairro)
     {
         return _context.Bairros
             .AsNoTracking()
             .Where(BairroQueries.Get(bairro))
             .OrderBy(x => x.BairroName);
+    }
+
+    public Bairro GetByName(string bairro)
+    {
+        return _context.Bairros
+            .FirstOrDefault(x => x.BairroName == bairro);
     }
 }

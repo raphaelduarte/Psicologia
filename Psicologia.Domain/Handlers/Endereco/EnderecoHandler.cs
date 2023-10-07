@@ -75,6 +75,9 @@ public class EnderecoHandler :
         {
             var bairroCommand = BairroQueries.Get(command.Bairro.BairroName)
                 .Name.ToString();
+            _bairro = _bairroRepository.GetByName(bairroCommand);
+
+
         }
         catch  // Se não existir um bairro com esse nome ele tem que criar um novo bairro
         {

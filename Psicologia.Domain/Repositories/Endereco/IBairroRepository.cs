@@ -8,5 +8,7 @@ namespace Psicologia.Domain.Repositories.Endereco;
         void Update(Bairro bairroName);
         void Remove(Bairro bairroName);
         Bairro GetById(Guid id);
+        Bairro GetByName(string bairroName);
+        IEnumerable<Bairro> GetByNameLink(string bairroName);
         IEnumerable<Bairro> GetAll();
     }
