@@ -47,6 +47,6 @@ public class EnderecoRepository : IEnderecoRepository
         return _context.Enderecos
             .AsNoTracking()
             .Where(EnderecoQueries.GetAll())
-            .OrderBy(x => x.CidadeEstado);
+            .OrderBy(x => x.Pais);
     }
 }

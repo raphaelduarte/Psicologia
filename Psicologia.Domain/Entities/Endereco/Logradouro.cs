@@ -13,5 +13,8 @@ namespace Psicologia.Domain.Entities.Endereco
             LogradouroName = logradouroName;
         }
         public string LogradouroName { get; private set; }
+        public List<Cidade> Cidades { get; private set; }
+        public List<Endereco> Enderecos { get; private set; }
+        public List<Estado> Estados { get; private set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using System.Security.AccessControl;
 using Psicologia.Domain.Commands;
 using Psicologia.Domain.Commands.Contracts;
@@ -24,8 +24,6 @@ public class EnderecoHandler :
     private readonly IEnderecoRepository _enderecoRepository;
     private readonly ILogradouroRepository _logradouroRepository;
     private readonly INumeroEnderecoRepository _numeroEnderecoRepository;
-    private readonly IBairroCidadeRepository _bairroCidadeRepository;
-    private readonly ICidadeEstadoRepository _cidadeEstadoRepository;
     private readonly IPaisRepository _paisRepository;
     private readonly IBairroRepository _bairroRepository;
     private readonly ICidadeRepository _cidadeRepository;
@@ -36,8 +34,6 @@ public class EnderecoHandler :
         IEnderecoRepository enderecoRepository,
         ILogradouroRepository logradouroRepository,
         INumeroEnderecoRepository numeroEnderecoRepository,
-        IBairroCidadeRepository bairroCidadeRepository,
-        ICidadeEstadoRepository cidadeEstadoRepository,
         IBairroRepository bairroRepository,
         ICidadeRepository cidadeRepository,
         IEstadoRepository estadoRepository,
@@ -50,8 +46,6 @@ public class EnderecoHandler :
         _bairroRepository = bairroRepository;
         _cidadeRepository = cidadeRepository;
         _estadoRepository = estadoRepository;
-        _bairroCidadeRepository = bairroCidadeRepository;
-        _cidadeEstadoRepository = cidadeEstadoRepository;
         _paisRepository = paisRepository;
     }
     public ICommandResult Handle(CreateEnderecoCommand command)
@@ -122,16 +116,7 @@ public class EnderecoHandler :
             var estado = new Estado(estadoHandle.ToString());
             _estado = estado;
         }
-
         
-        
-        var bairroCidade = new BairroCidade(
-            _bairro.Id,
-            _cidade.Id);
-
-        var cidadeEstado = new CidadeEstado(
-            _cidade.Id,
-            _estado.Id);
 
 
         var eTipoResidencia = command.ETipoResidencia;
@@ -140,8 +125,6 @@ public class EnderecoHandler :
            logradouro,
            numero,
            eTipoResidencia,
-           bairroCidade,
-           cidadeEstado,
            pais);
        
        _enderecoRepository.Create(endereco);
@@ -192,25 +175,6 @@ public class EnderecoHandler :
         _estadoRepository.UpdateEstadoName(estadoHandle.ToString());
         _estadoRepository.Update(estado);
 
-        var bairroCidadeHandler = new BairroCidadeHandler(
-            _bairroCidadeRepository,
-            _bairroRepository,
-            _cidadeRepository
-            );
-        var bairroCidadeHandle = bairroCidadeHandler.Handle(command.BairroCidade);
-        var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade.IdBairroCidade);
-        _bairroCidadeRepository.Update(bairroCidade);
-
-        
-        var cidadeEstadoHandler = new CidadeEstadoHandler(
-            _cidadeEstadoRepository,
-            _cidadeRepository,
-            _estadoRepository)
-            ;
-        var cidadeEstadoHandle = cidadeEstadoHandler.Handle(command.CidadeEstado);
-        var cidadeEstado = _cidadeEstadoRepository.GetById(command.CidadeEstado.IdCidadeEstado);
-        _cidadeEstadoRepository.Update(cidadeEstado);
-        
 
         var endereco = _enderecoRepository.GetById(command.IdEndereco);
         _enderecoRepository.Update(endereco);
@@ -231,11 +195,14 @@ public class EnderecoHandler :
         
         var eTipoResidencia = command.ETipoResidencia;
         
-        var bairroCidade = _bairroCidadeRepository.GetById(command.BairroCidade.IdBairroCidade);
-        _bairroCidadeRepository.Remove(bairroCidade);
+        var bairro = _bairroRepository.GetById(command.Bairro.Id);
+        _bairroRepository.Remove(bairro);
         
-        var cidadeEstado = _cidadeEstadoRepository.GetById(command.CidadeEstado.IdCidadeEstado);
-        _cidadeEstadoRepository.Remove(cidadeEstado);
+        var cidade = _cidadeRepository.GetById(command.Cidade.Id);
+        _cidadeRepository.Remove(cidade);
+        
+        var estado = _estadoRepository.GetById(command.Estado.IdEstado);
+        _estadoRepository.Remove(estado);
         
         var pais = _paisRepository.GetById(command.Pais.IdPais);
         _paisRepository.Remove(pais);

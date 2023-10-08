@@ -13,5 +13,9 @@ namespace Psicologia.Domain.Entities.Endereco
             Numero = numeroEndereco;
         }
         public int Numero { get; private set; }
+        public List<Logradouro> Logradouros { get; private set; }
+        public List<Cidade> Cidades { get; private set; }
+        public List<Endereco> Enderecos { get; private set; }
+        public List<Estado> Estados { get; private set; }
     }
 }

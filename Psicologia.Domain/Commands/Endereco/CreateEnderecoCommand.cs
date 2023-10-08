@@ -1,8 +1,6 @@
 ﻿using System.Drawing;
 using Psicologia.Domain.Commands.Endereco.Bairro;
-using Psicologia.Domain.Commands.Endereco.BairroCidade;
 using Psicologia.Domain.Commands.Endereco.Cidade;
-using Psicologia.Domain.Commands.Endereco.CidadeEstado;
 using Psicologia.Domain.Commands.Endereco.Estado;
 using Psicologia.Domain.Commands.Endereco.Logradouro;
 using Psicologia.Domain.Commands.Endereco.NumeroEndereco;
@@ -25,8 +23,7 @@ public class CreateEnderecoCommand
         CreateCidadeCommand cidadeCommand,
         CreateEstadoCommand estadoCommand,
         CreatePaisCommand paisCommand,
-        ETipoResidencia eTipoResidencia,
-        CreateBairroCidadeCommand bairroCidadeCommand)
+        ETipoResidencia eTipoResidencia)
     {
         Logradouro = logradouroCommand;
         Numero = numeroCommand;
@@ -35,7 +32,6 @@ public class CreateEnderecoCommand
         Estado = estadoCommand;
         ETipoResidencia = eTipoResidencia;
         Pais = paisCommand;
-        BairroCidade = bairroCidadeCommand;
 
     }
     public CreateLogradouroCommand Logradouro { get; private set; }
@@ -45,5 +41,4 @@ public class CreateEnderecoCommand
     public CreateEstadoCommand Estado { get; private set; }
     public CreatePaisCommand Pais { get; private set; }
     public ETipoResidencia ETipoResidencia { get; private set; }
-    public CreateBairroCidadeCommand BairroCidade { get; private set; }
 }

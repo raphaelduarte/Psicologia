@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Psicologia.Domain.Handlers.Endereco;
 
 namespace Psicologia.Domain.Entities.Endereco
 {
@@ -15,7 +16,6 @@ namespace Psicologia.Domain.Entities.Endereco
         public string CidadeName { get; private set; }
         public List<Bairro> Bairros { get; private set; }
         public List<Estado> Estados { get; private set; }
-        public ICollection<BairroCidade> BairroCidades { get; set; }
-        public ICollection<CidadeEstado> CidadeEstados { get; set; }
+        public List<Endereco> Enderecos { get; private set; }
     }
 }

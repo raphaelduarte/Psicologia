@@ -22,18 +22,30 @@
     <Compile Remove="Repositories\Endereco\EstadoRepository.cs" />
     <Compile Remove="Services\**" />
     <Compile Remove="Contexts\**" />
+    <Compile Remove="Commands\Endereco\BairroCidade\**" />
+    <Compile Remove="Commands\Endereco\CidadeEstado\**" />
+    <Compile Remove="Handlers\Endereco\BairroCidadeHandler.cs" />
+    <Compile Remove="Handlers\Endereco\CidadeEstadoHandler.cs" />
+    <Compile Remove="Queries\Endereco\CidadeEstadoQueries.cs" />
+    <Compile Remove="Queries\Endereco\BairroCidadeQueries.cs" />
+    <Compile Remove="Repositories\Endereco\IBairroCidadeRepository.cs" />
+    <Compile Remove="Repositories\Endereco\ICidadeEstadoRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Validator\Endereco\BairroCidade\**" />
     <EmbeddedResource Remove="Services\**" />
     <EmbeddedResource Remove="Contexts\**" />
+    <EmbeddedResource Remove="Commands\Endereco\BairroCidade\**" />
+    <EmbeddedResource Remove="Commands\Endereco\CidadeEstado\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Validator\Endereco\BairroCidade\**" />
     <None Remove="Services\**" />
     <None Remove="Contexts\**" />
+    <None Remove="Commands\Endereco\BairroCidade\**" />
+    <None Remove="Commands\Endereco\CidadeEstado\**" />
   </ItemGroup>
 
 </Project>

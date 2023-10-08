@@ -17,16 +17,16 @@ namespace Psicologia.Infrastructure.Contexts
         public DbSet<NumeroEndereco> NumeroEnderecos { get; set; }
         public DbSet<Bairro> Bairros { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
-        public DbSet<BairroCidade> BairrosCidades { get; set; }
         public DbSet<Estado> Estados { get; set; }
-        public DbSet<CidadeEstado> CidadesEstados { get; set; }
         public DbSet<Pais> Paises { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder options)
         {
-            options.UseSqlServer("connectionString");
+            //options.UseSqlServer("connectionString");
+            //options.UseNpgsql("postgres://postgres:cachorromajo@localhost:5432/postgres");
+            options.UseInMemoryDatabase("Database");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
