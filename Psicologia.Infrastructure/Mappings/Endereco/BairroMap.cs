@@ -19,5 +19,25 @@ public class BairroMap : IEntityTypeConfiguration<Bairro>
             .HasColumnName("Bairro")
             .HasColumnType("NVARCHAR")
             .HasMaxLength(80);
+
+
+        // Relacionamentos
+        builder
+            .HasMany(x => x.Cidades)
+            .WithMany(x => x.Bairros)
+            .UsingEntity<Dictionary<string, object>>(
+                "BairroCidade",
+                bairro => bairro
+                    .HasOne<Cidade>()
+                    .WithMany()
+                    .HasForeignKey("BairroId")
+                    .HasConstraintName("FK_BairroCidade_BairroId")
+                    .OnDelete(DeleteBehavior.Cascade),
+                cidade => cidade
+                    .HasOne<Bairro>()
+                    .WithMany()
+                    .HasForeignKey("CidadeId")
+                    .HasConstraintName("FK_BairroCidade_CidadeId")
+                    .OnDelete(DeleteBehavior.Cascade));
     }
 }

@@ -13,6 +13,8 @@ namespace Psicologia.Domain.Entities.Endereco
             CidadeName = cidade;
         }
         public string CidadeName { get; private set; }
+        public List<Bairro> Bairros { get; private set; }
+        public List<Estado> Estados { get; private set; }
         public ICollection<BairroCidade> BairroCidades { get; set; }
         public ICollection<CidadeEstado> CidadeEstados { get; set; }
     }

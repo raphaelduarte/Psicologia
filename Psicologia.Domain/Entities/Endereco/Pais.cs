@@ -13,5 +13,6 @@ namespace Psicologia.Domain.Entities.Endereco
             PaisName = paisName;
         }
         public string PaisName { get; private set; }
+        public List<Estado> Estados { get; private set; }
     }
 }

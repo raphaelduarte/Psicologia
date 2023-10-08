@@ -8,5 +8,7 @@ public class Bairro : Entity
     }
 
     public string BairroName { get; private set; }
+    public List<Logradouro> Logradouros { get; private set; }
+    public List<Cidade> Cidades { get; private set; }
     public ICollection<BairroCidade> BairroCidades { get; set; }
 }
