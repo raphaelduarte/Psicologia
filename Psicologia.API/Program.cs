@@ -21,6 +21,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
 // builder.Services.AddDbContext<DataContext>(opt => 
 //     opt.UseSqlServer("Data Source=desktop-i4tk8nf\\sqlexpress;Initial Catalog=HahnDb;Integrated Security=True;Trusted_Connection=True;Encrypt=False"));
+builder.Services.AddDbContext<DataContext>(opt => 
+    opt.UseNpgsql(
+    "postgres://postgres:cachorromajo@localhost:5432/postgres"));
+
 
 builder.Services.AddControllers()
     .AddFluentValidation(config =>

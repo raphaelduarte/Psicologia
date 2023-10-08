@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Psicologia.Domain.Entities.Endereco;
+using Psicologia.Infrastructure.Mappings.Endereco;
 
 namespace Psicologia.Infrastructure.Contexts
 {
@@ -22,8 +23,21 @@ namespace Psicologia.Infrastructure.Contexts
         public DbSet<Pais> Paises { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
 
+        protected override void OnConfiguring(
+            DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer("connectionString");
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new LogradouroMap());
+            modelBuilder.ApplyConfiguration(new NumeroMap());
+            modelBuilder.ApplyConfiguration(new BairroMap());
+            modelBuilder.ApplyConfiguration(new CidadeMap());
+            modelBuilder.ApplyConfiguration(new EstadoMap());
+            modelBuilder.ApplyConfiguration(new PaisMap());
+            
             modelBuilder.Entity<Logradouro>().HasKey(x => x.Id);
             modelBuilder.Entity<Logradouro>().Property(x => x.LogradouroName).HasMaxLength(255).HasColumnType("varchar(255)");
 
