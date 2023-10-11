@@ -13,6 +13,7 @@ using Psicologia.Domain.Validator.Endereco.NumeroEndereco;
 using Psicologia.Domain.Validator.Endereco.Pais;
 using Psicologia.Infrastructure.Contexts;
 using Psicologia.Infrastructure.Repositories.Endereco;
+using Supabase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,15 @@ builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Datab
 //builder.Services.AddDbContext<DataContext>(opt => 
    // opt.UseNpgsql(
     //"postgres://postgres:cachorromajo@localhost:5432/postgres"));
+builder.Services.AddScoped<Supabase.Client>(_ => 
+    new Supabase.Client(
+        builder.Configuration["SupabaseUrl"],
+        builder.Configuration["SupabaseKey"],
+        new SupabaseOptions
+        {
+            AutoRefreshToken = true,
+            AutoConnectRealtime = true
+        }));
 
 
 builder.Services.AddControllers()
